@@ -26,28 +26,7 @@ PlayerManager.prototype.addPlayer = function(name) {
 };
 
 PlayerManager.prototype.getColor = function() {
-    var newRGBColor = this.colorManager.getColor(),
-        r,
-        g,
-        b;
-    
-    r = newRGBColor[0].toString(16);
-    g = newRGBColor[1].toString(16);
-    b = newRGBColor[2].toString(16);
-
-    if (r.length < 2) {
-        r = '0' + r;
-    }
-
-    if (g.length < 2) {
-        g = '0' + g;
-    }
-
-    if (b.length < 2) {
-        b = '0' + b;
-    }
-
-    return '#' + r + g + b;  
+    return this.colorManager.convertRGBToHex(this.colorManager.getColor());
 };
 
 PlayerManager.prototype.getPlayerByID = function(playerID) {

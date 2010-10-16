@@ -15,6 +15,30 @@ ColorManager.prototype.reset = function() {
     this.hue = Math.random();  
 };
 
+ColorManager.prototype.convertRGBToHex = function(color) {
+    var r,
+        g,
+        b;
+    
+    r = color[0].toString(16);
+    g = color[1].toString(16);
+    b = color[2].toString(16);
+
+    if (r.length < 2) {
+        r = '0' + r;
+    }
+
+    if (g.length < 2) {
+        g = '0' + g;
+    }
+
+    if (b.length < 2) {
+        b = '0' + b;
+    }
+
+    return '#' + r + g + b;  
+};
+
 ColorManager.prototype.convertHSVToRGB = function(hue, saturation, value) {
     var h,
         hi,
