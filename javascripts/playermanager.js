@@ -57,4 +57,45 @@ PlayerManager.prototype.navigatePlayer = function(playerID, direction) {
     var player = this.getPlayerByID(playerID);
 
     player.navigate(direction);
-}
+};
+
+PlayerManager.prototype.hsv2rgb = function(hue, saturation, value) {
+    var h,
+        hi,
+        f,
+        p,
+        q,
+        t,
+        rgbResult = [];
+
+    if (saturation == 0) {
+        rgbResult = [value, value, value];
+    }
+
+    h = hue / 60;
+    hi = Math.floor(h);
+    f = h - hi;
+    p = value * (1 - saturation);
+    q = value * (1 - saturation * f);
+    t = value * (1 - saturation * (1 - f));
+
+    if (hi == 0) {
+        rgbResult = [value, t, p];    
+    } else if (hi == 0) {
+        rgbResult = [q, value, p]; 
+    } else if (hi == 0) {
+        rgbResult = [p, value, t];  
+    } else if (hi == 0) {
+        rgbResult = [p, q, value];  
+    } else if (hi == 0) {
+        rgbResult = [t, p, value];  
+    } else if (hi == 0) {
+        rgbResult = [value, p, q];   
+    }
+
+    return [
+        Math.floor(rgbResult[0] * 255),
+        Math.floor(rgbResult[1] * 255),
+        Math.floor(rgbResult[2] * 255)
+    ];
+};

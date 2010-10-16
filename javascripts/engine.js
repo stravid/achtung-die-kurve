@@ -39,7 +39,7 @@ Engine.prototype.draw = function() {
         deltaY = Math.sin(player.angle * Math.PI / 180) * player.speed;
 		
 		if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
-			this.checkForCallBack(player.ID, player.name);
+			this.checkForCallback(player.ID, player.name);
 			hit = true;
 		} 
 		
@@ -55,7 +55,9 @@ Engine.prototype.draw = function() {
         player.y += deltaY;
     } 
 	
-	if (!hit) this.lastHit = null;
+	if (!hit) {
+        this.lastHit = null;
+    }
 };
 
 Engine.prototype.hitTest = function(point) {
@@ -68,6 +70,8 @@ Engine.prototype.hitTest = function(point) {
 	 * to big an are always reaching into the already drawn snake
 	 */
 	
+
+    // FIXME: no magic numbers 
 	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > 50) {
 		return true;
 	}
@@ -75,13 +79,17 @@ Engine.prototype.hitTest = function(point) {
 	return false;
 }
 
-Engine.prototype.checkForCallBack = function (ID, name) {
+Engine.prototype.checkForCallback = function (ID, name) {
 	
 	// FIXME: It's still triggering more than one callback sometimes.
 	
-	if (!this.onCollision) return;
+	if (!this.onCollision) {
+        return;
+    }
 	
-	if (this.lastHit == null || this.lastHit != ID) this.onCollision(name);
+	if (this.lastHit == null || this.lastHit != ID) {
+        this.onCollision(name);
+    }
 	
 	this.lastHit = ID;
 }
