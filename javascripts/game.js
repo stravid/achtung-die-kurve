@@ -6,7 +6,8 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
     var width = canvasWidth,
         height = canvasHeight,
         canvasElement = document.getElementById(canvasID),
-        drawingContext;
+        drawingContext,
+		collisionCall = function () {};
 
     if (this.useFullscreen) {
         width = window.innerWidth;
@@ -22,9 +23,6 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
         throw 'No canvas support';
     }
 
-    //drawingContext.fillStyle = 'rgb(50, 50, 50)';
-    //drawingContext.fillRect(0, 0, width, height);
-
     this.playerManager = new PlayerManager(width, height);
     this.engine = new Engine(drawingContext, this.playerManager.players);
 
@@ -38,3 +36,7 @@ Game.prototype.addPlayer = function(name) {
 Game.prototype.handleControl = function(playerID, direction) {
     this.playerManager.navigatePlayer(playerID, direction);  
 };
+
+Game.prototype.setCollisionCallback = function (callback) {
+	this.engine.setCollisionCallback(callback);
+}
