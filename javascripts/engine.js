@@ -41,7 +41,7 @@ Engine.prototype.draw = function() {
         deltaY = Math.sin(player.angle * Math.PI / 180) * player.speed;
 		
 		if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
-			this.checkForCallback(player.ID, player.name);
+			this.checkForCallback(player.ID);
 			hit = true;
 		} 
 		
@@ -55,6 +55,7 @@ Engine.prototype.draw = function() {
 
         player.x += deltaX;
         player.y += deltaY;
+		player.distance += parseInt(Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)));
     } 
 	
 	if (!hit) {
@@ -86,7 +87,7 @@ Engine.prototype.hitTest = function(point) {
 	return false;
 }
 
-Engine.prototype.checkForCallback = function (ID, name) {
+Engine.prototype.checkForCallback = function (ID) {
 	
 	// FIXME: It's still triggering more than one callback sometimes.
 	
@@ -95,7 +96,7 @@ Engine.prototype.checkForCallback = function (ID, name) {
     }
 	
 	if (this.lastHit == null || this.lastHit != ID) {
-        this.onCollision(name);
+        this.onCollision(ID);
     }
 	
 	this.lastHit = ID;

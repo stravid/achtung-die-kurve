@@ -29,12 +29,22 @@ PlayerManager.prototype.getColor = function() {
     return this.colorManager.convertRGBToHex(this.colorManager.getColor());
 };
 
-PlayerManager.prototype.getPlayerByID = function(playerID) {
-    return this.players[playerID]; 
-};
-
 PlayerManager.prototype.navigatePlayer = function(playerID, direction) {
     var player = this.getPlayerByID(playerID);
 
     player.navigate(direction);
 };
+
+/* ---- GETTER & SETTER ---- */
+PlayerManager.prototype.getPlayerByID = function(playerID) {
+    return this.players[playerID]; 
+};
+
+PlayerManager.prototype.getPlayerName = function (playerID) {
+	return this.players[playerID].name;
+}
+
+PlayerManager.prototype.getPlayerDistance = function (playerID) {
+	return this.players[playerID].distance;
+}
+
