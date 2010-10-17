@@ -14,11 +14,6 @@ var game = new Game('gameCanvas', 1650, 900, false),
 
 game.setCollisionCallback(function (playerID) {
 	
-	//console.log(game.playerManager.getPlayerName(playerID) + " failed!");
-	
-	//console.log("Mathi went " + game.playerManager.getPlayerDistance(playerA) + " pixels!");
-	//console.log("Dave went " + game.playerManager.getPlayerDistance(playerB) + " pixels!");
-	
 	if (game.playerManager.numberOfPlayersAlive() < 2) {
 		game.restart()
 	}
