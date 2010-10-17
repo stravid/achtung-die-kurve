@@ -5,33 +5,41 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
 
     this.width = canvasWidth;
     this.height = canvasHeight;
-
-    var canvasElement = document.getElementById(canvasID),
-        drawingContext,
-        // FIXME: is it in use?
-		collisionCall = function () {};
+    this.canvasElement = document.getElementById(canvasID);
 
     if (this.useFullscreen) {
         this.width = window.innerWidth;
         this.height = window.innerHeight;
     }
 
-    canvasElement.width = this.width;
-    canvasElement.height = this.height; 
+    this.canvasElement.width = this.width;
+    this.canvasElement.height = this.height; 
     
-    if (canvasElement.getContext) {
-        this.drawingContext = canvasElement.getContext('2d');
+    if (this.canvasElement.getContext) {
+        this.drawingContext = this.canvasElement.getContext('2d');
     } else {
         throw 'No canvas support';
     }
 	
-	this.createFrame();
-	
     this.playerManager = new PlayerManager(this.width, this.height);
     this.engine = new Engine(this.width, this.height, this.drawingContext, this.playerManager.players);
-
-    this.engine.start();
 };
+
+Game.prototype.start = function() {
+	this.drawFrame();
+	this.playerManager.initializePlayers();
+	this.engine.start();	
+}
+
+Game.prototype.restart = function() {
+	this.engine.stop();
+	this.drawingContext.clearRect(0, 0, this.width, this.height);
+	this.start();
+}
+
+Game.prototype.stop = function() {
+	this.engine.stop();
+}
 
 Game.prototype.addPlayer = function(name) {
     return this.playerManager.addPlayer(name);
@@ -45,9 +53,8 @@ Game.prototype.setCollisionCallback = function (callback) {
 	this.engine.setCollisionCallback(callback);
 }
 
-Game.prototype.createFrame = function () {
-	
-	this.drawingContext.lineWidth = 3;
-	this.drawingContext.strokeStyle = "#000";
-	this.drawingContext.strokeRect(10, 10, this.width - 20, this.height - 20);
+Game.prototype.drawFrame = function () {
+	this.drawingContext.lineWidth = 10;
+	this.drawingContext.strokeStyle = "#E3D42E";
+	this.drawingContext.strokeRect(0, 0, this.width - 0, this.height - 0);
 }

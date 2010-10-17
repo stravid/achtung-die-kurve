@@ -7,6 +7,8 @@ var Player = function() {
     this.color = '';
     this.ID = null;
 	this.distance = 0;
+	this.isPlaying = false;
+	this.isAlive = false;
 };
 
 Player.prototype.navigate = function(direction) {

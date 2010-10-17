@@ -14,7 +14,9 @@ var Engine = function(width, height, context, players) {
 
 Engine.prototype.start = function() {
     var that = this;
-
+	
+	this.cancel = false;
+	
     if (this.intervalID == 0) {
         this.intervalID = setInterval(function() {
             that.draw();
@@ -37,12 +39,31 @@ Engine.prototype.draw = function() {
 
     for (var i = 0; i < this.players.length; i++) {
         player = this.players[i];
+
+		if (!player.isPlaying || !player.isAlive) {
+			continue;
+		}
+		
         deltaX = Math.cos(player.angle * Math.PI / 180) * player.speed;
         deltaY = Math.sin(player.angle * Math.PI / 180) * player.speed;
 		
 		if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
-			this.checkForCallback(player.ID);
+			player.isAlive = false;
 			hit = true;
+			
+			var count = 0;
+			for (var j = 0; j < this.players.length; j++) {
+				if (this.players[j].isAlive) {
+					count++;
+				}
+			}
+			
+			this.checkForCallback(player.ID);
+			
+			if (count < 2) {
+				return;
+			}
+			
 		} 
 		
         this.drawingContext.strokeStyle = player.color;
@@ -55,7 +76,7 @@ Engine.prototype.draw = function() {
 
         player.x += deltaX;
         player.y += deltaY;
-		player.distance += parseInt(Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)));
+		player.distance += Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     } 
 	
 	if (!hit) {
@@ -65,24 +86,10 @@ Engine.prototype.draw = function() {
 
 Engine.prototype.hitTest = function(point) {
 	
-	/* 
-	 * For collision detection the 0 alpha background of the canvas itsef is
-	 * being compared with the pixel the player is heading to
-	 *
-	 * I'm only using one single pixel because any bigger area (especially circles) are
-	 * to big an are always reaching into the already drawn snake
-	 */
-	
-
     // FIXME: no magic numbers 
-	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > 50) {
+	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > 100) {
 		return true;
 	}
-
-    if (point.x < 0 || point.x > this.width || point.y < 0 || point.y > this.height) {
-        console.log('canvas hit');
-        return true;
-    }
 	
 	return false;
 }
