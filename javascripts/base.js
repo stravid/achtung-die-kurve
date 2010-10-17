@@ -15,6 +15,14 @@ var game = new Game('gameCanvas', 600, 400, true),
 game.setCollisionCallback(function (playerID) {
 	console.log(game.playerManager.getPlayerName(playerID) + " failed!");
 	
+	/*
+	 * The engine is capable of counting the distance (in pixels) how far every
+	 * player went. However - until now - it's a little senseless as you can see when
+	 * you play one round. The game stops whenever somebody hits the frame but that also means
+	 * every player went the exact same distance!
+	 * Still it's a 'nice to have'!
+	 */
+	
 	console.log("Mathi went " + game.playerManager.getPlayerDistance(playerA) + " pixels!");
 	console.log("Dave went " + game.playerManager.getPlayerDistance(playerB) + " pixels!");
 	
