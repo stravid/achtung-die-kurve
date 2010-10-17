@@ -7,6 +7,7 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
         height = canvasHeight,
         canvasElement = document.getElementById(canvasID),
         drawingContext,
+        // FIXME: is it in use?
 		collisionCall = function () {};
 
     if (this.useFullscreen) {
@@ -24,7 +25,7 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
     }
 
     this.playerManager = new PlayerManager(width, height);
-    this.engine = new Engine(drawingContext, this.playerManager.players);
+    this.engine = new Engine(this.width, this.height, drawingContext, this.playerManager.players);
 
     this.engine.start();
 };

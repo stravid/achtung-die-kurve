@@ -4,7 +4,7 @@ var Player = function() {
     this.speed = 1;
     this.angle = 0;
     this.name = '';
-    this.color = 0;
+    this.color = '';
     this.ID = null;
 };
 

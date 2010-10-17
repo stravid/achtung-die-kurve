@@ -1,4 +1,4 @@
-var Engine = function(context, players) {
+var Engine = function(width, height, context, players) {
     this.frameRate = 100;
     this.intervalID = 0;
     this.drawingContext = context;
@@ -8,6 +8,8 @@ var Engine = function(context, players) {
 	this.lineWidth = 3;
 	this.onCollision = null;
 	this.lastHit = null;
+    this.width = width;
+    this.height = height;
 };
 
 Engine.prototype.start = function() {
@@ -75,6 +77,11 @@ Engine.prototype.hitTest = function(point) {
 	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > 50) {
 		return true;
 	}
+
+    if (point.x < 0 || point.x > this.width || point.y < 0 || point.y > this.height) {
+        console.log('canvas hit');
+        return true;
+    }
 	
 	return false;
 }
