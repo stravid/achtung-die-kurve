@@ -12,8 +12,13 @@ var game = new Game('gameCanvas', 600, 400, true),
     directionA = 0,
     directionB = 0;
 
-game.setCollisionCallback(function (name) {
-	console.log(name + " failed!");
+game.setCollisionCallback(function (playerID) {
+	console.log(game.playerManager.getPlayerName(playerID) + " failed!");
+	
+	console.log("Mathi went " + game.playerManager.getPlayerDistance(playerA) + " pixels!");
+	console.log("Dave went " + game.playerManager.getPlayerDistance(playerB) + " pixels!");
+	
+	game.engine.stop();
 });
   
 setInterval(function() {

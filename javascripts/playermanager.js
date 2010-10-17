@@ -33,6 +33,14 @@ PlayerManager.prototype.getPlayerByID = function(playerID) {
     return this.players[playerID]; 
 };
 
+PlayerManager.prototype.getPlayerName = function (playerID) {
+	return this.players[playerID].name;
+}
+
+PlayerManager.prototype.getPlayerDistance = function (playerID) {
+	return this.players[playerID].distance;
+}
+
 PlayerManager.prototype.navigatePlayer = function(playerID, direction) {
     var player = this.getPlayerByID(playerID);
 

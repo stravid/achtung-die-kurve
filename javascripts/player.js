@@ -6,6 +6,7 @@ var Player = function() {
     this.name = '';
     this.color = 0;
     this.ID = null;
+	this.distance = 0;
 };
 
 Player.prototype.navigate = function(direction) {
