@@ -3,17 +3,18 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
         this.useFullscreen = arguments[3];
     }
 
-    this.width = canvasWidth;
-    this.height = canvasHeight;
+    Config.width = canvasWidth;
+    Config.height = canvasHeight;
+	
     this.canvasElement = document.getElementById(canvasID);
 
     if (this.useFullscreen) {
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
+        Config.width = window.innerWidth;
+        Config.height = window.innerHeight;
     }
 
-    this.canvasElement.width = this.width;
-    this.canvasElement.height = this.height; 
+    this.canvasElement.width = Config.width;
+    this.canvasElement.height = Config.height; 
     
     if (this.canvasElement.getContext) {
         this.drawingContext = this.canvasElement.getContext('2d');
@@ -21,8 +22,8 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
         throw 'No canvas support';
     }
 	
-    this.playerManager = new PlayerManager(this.width, this.height);
-    this.engine = new Engine(this.width, this.height, this.drawingContext, this.playerManager.players);
+    this.playerManager = new PlayerManager();
+    this.engine = new Engine(this.drawingContext, this.playerManager.players);
 };
 
 Game.prototype.start = function() {
@@ -33,7 +34,7 @@ Game.prototype.start = function() {
 
 Game.prototype.restart = function() {
 	this.engine.stop();
-	this.drawingContext.clearRect(0, 0, this.width, this.height);
+	this.drawingContext.clearRect(0, 0, Config.width, Config.height);
 	this.start();
 }
 
@@ -56,5 +57,5 @@ Game.prototype.setCollisionCallback = function (callback) {
 Game.prototype.drawFrame = function () {
 	this.drawingContext.lineWidth = 10;
 	this.drawingContext.strokeStyle = "#E3D42E";
-	this.drawingContext.strokeRect(0, 0, this.width - 0, this.height - 0);
+	this.drawingContext.strokeRect(0, 0, Config.width - 0, Config.height - 0);
 }

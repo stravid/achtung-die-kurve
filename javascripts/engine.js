@@ -1,26 +1,18 @@
-var Engine = function(width, height, context, players) {
-    this.frameRate = 100;
+var Engine = function(context, players) {
     this.intervalID = 0;
     this.drawingContext = context;
     this.players = players;
-	
-	// FIXME: should be a Game var not in engine!
-	this.lineWidth = 3;
 	this.onCollision = null;
 	this.lastHit = null;
-    this.width = width;
-    this.height = height;
 };
 
 Engine.prototype.start = function() {
     var that = this;
 	
-	this.cancel = false;
-	
     if (this.intervalID == 0) {
         this.intervalID = setInterval(function() {
             that.draw();
-        }, 1000 / this.frameRate);    
+        }, 1000 / Config.frameRate);    
     }
 	
 };
@@ -62,14 +54,13 @@ Engine.prototype.draw = function() {
 			
 			if (count < 2) {
 				return;
-			}
-			
+			}	
 		} 
 		
         this.drawingContext.strokeStyle = player.color;
         this.drawingContext.fillStyle = player.color;
         this.drawingContext.beginPath();
-        this.drawingContext.lineWidth = this.lineWidth;
+        this.drawingContext.lineWidth = Config.lineWidth;
         this.drawingContext.moveTo(player.x, player.y);
         this.drawingContext.lineTo(player.x + deltaX, player.y + deltaY);
         this.drawingContext.stroke();
@@ -86,8 +77,7 @@ Engine.prototype.draw = function() {
 
 Engine.prototype.hitTest = function(point) {
 	
-    // FIXME: no magic numbers 
-	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > 100) {
+	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > Config.threshold) {
 		return true;
 	}
 	

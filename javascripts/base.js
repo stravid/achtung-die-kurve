@@ -3,7 +3,7 @@
  * Player B: Á, S
  */
 
-var game = new Game('gameCanvas', 1200, 700, false),
+var game = new Game('gameCanvas', 1650, 900, false),
     playerA = game.addPlayer('mathi'),
     playerB = game.addPlayer('dave'),
     keyChecker = function() {
@@ -25,7 +25,8 @@ game.setCollisionCallback(function (playerID) {
 });
 
 function onAddPlayer() {
-	game.addPlayer('bla');	
+	for (var i = 0; i < 50; i++) 
+		game.addPlayer('bla');	
 }
 
 game.start();
