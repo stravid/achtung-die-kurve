@@ -1,7 +1,3 @@
-function rand(minimum, maximum) {
-    return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-};
-
 var PlayerManager = function() {
     this.players = [];
     this.colorManager = new ColorManager(0.99, 0.99);
@@ -23,8 +19,8 @@ PlayerManager.prototype.initializePlayers = function() {
 	for (var i = 0; i < this.players.length; i++) {
 		var player = this.players[i];
 		
-		player.x = rand(Config.width / 4, 3 * Config.width / 4);
-    	player.y = rand(Config.height / 4, 3 * Config.height / 4);
+		player.x = Utilities.random(Config.width / 4, 3 * Config.width / 4);
+    	player.y = Utilities.random(Config.height / 4, 3 * Config.height / 4);
     	player.angle = Math.random() * 360;	
 		player.isPlaying = true;
 		player.isAlive = true;
