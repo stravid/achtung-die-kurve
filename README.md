@@ -1,5 +1,7 @@
-Author: David Strauß (http://www.stravid.com)
-        Mathias Paumgarten (http://www.mathias-paumgarten.com)
+Author: 
+
+[David Strauß] (http://www.stravid.com)
+[Mathias Paumgarten] (http://www.mathias-paumgarten.com)
 
 
 This is a browser-game enterily driven by Javascript. The concept is based on a game
