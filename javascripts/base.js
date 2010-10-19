@@ -19,8 +19,8 @@ game.setCollisionCallback(function (playerID) {
 	}
 });
 
-function onAddPlayer() {
-	game.addPlayer('bla');	
+function onAddPlayer(name) {
+	return game.addPlayer(name);	
 }
 
 function onRestartGame() {
