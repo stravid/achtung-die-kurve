@@ -25,6 +25,11 @@ game.setCollisionCallback(function (playerID) {
 game.start();
 
 
+// ---- Player Details ---- //
+// game.playerManager.getPlayerColor(playerID);
+// game.playerManager.getPlayerName(playerID);
+// game.playerManager.getPlayerDistance(playerID);
+
 // ---- Game Controlling Methods ----//
 function onAddPlayer(name) {
 	return game.addPlayer(name);	
@@ -38,8 +43,6 @@ function onStopGame() {
 	game.stop();	
 }
 
-
- 
  
  // ---- Game Controlling (Keyboard) ---- // 
 var directionA = 0;

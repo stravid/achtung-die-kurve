@@ -62,3 +62,7 @@ PlayerManager.prototype.getPlayerDistance = function (playerID) {
 	return this.players[playerID].distance;
 }
 
+PlayerManager.prototype.getPlayerColor = function (playerID) {
+	return this.players[playerID].color;
+}
+
