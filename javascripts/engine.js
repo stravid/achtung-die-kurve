@@ -9,12 +9,11 @@ var Engine = function(context, players) {
 Engine.prototype.start = function() {
     var that = this;
 	
-    if (this.intervalID == 0) {
+    if (this.intervalID === 0) {
         this.intervalID = setInterval(function() {
             that.draw();
         }, 1000 / Config.frameRate);    
     }
-	
 };
 
 Engine.prototype.stop = function() {
@@ -82,7 +81,7 @@ Engine.prototype.hitTest = function(point) {
 	}
 	
 	return false;
-}
+};
 
 Engine.prototype.checkForCallback = function (ID) {
 	
@@ -92,14 +91,14 @@ Engine.prototype.checkForCallback = function (ID) {
         return;
     }
 	
-	if (this.lastHit == null || this.lastHit != ID) {
+	if (this.lastHit === null || this.lastHit != ID) {
         this.onCollision(ID);
     }
 	
 	this.lastHit = ID;
-}
+};
 
 /* ---- Getter & Setter ---- */
 Engine.prototype.setCollisionCallback = function (callback) {
 	this.onCollision = callback;
-}
+};

@@ -48,7 +48,7 @@ ColorManager.prototype.convertHSVToRGB = function(hue, saturation, value) {
         t,
         rgbResult = [];
 
-    if (saturation == 0) {
+    if (saturation === 0) {
         rgbResult[0] = value;
         rgbResult[1] = value;
         rgbResult[2] = value;
@@ -61,7 +61,7 @@ ColorManager.prototype.convertHSVToRGB = function(hue, saturation, value) {
     q = value * (1 - saturation * f);
     t = value * (1 - saturation * (1 - f));
 
-    if (hi == 0) {
+    if (hi === 0) {
         rgbResult = [value, t, p];
     } else if (hi == 1) {
         rgbResult = [q, value, p];
