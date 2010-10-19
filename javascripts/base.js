@@ -3,15 +3,17 @@
  * Player B: Á, S
  */
 
-var game = new Game('gameCanvas', 600, 400, false),
-    playerA = game.addPlayer('mathi'),
-    playerB = game.addPlayer('dave'),
-    keyChecker = function() {
-        
-    },
-    directionA = 0,
-    directionB = 0;
 
+// ---- Game Init ---- //
+
+// Creates the Game Canvas (canvasID, width, height, fullscreen)
+var game = new Game('gameCanvas', 600, 400, false);
+
+// Creates a new Player (name)
+var playerA = game.addPlayer('Dave');
+var playerB = game.addPlayer('Dave');
+
+// Set a callback method whenever a hit happens
 game.setCollisionCallback(function (playerID) {
 	
 	if (game.playerManager.numberOfPlayersAlive() < 2) {
@@ -19,6 +21,11 @@ game.setCollisionCallback(function (playerID) {
 	}
 });
 
+// start the game
+game.start();
+
+
+// ---- Game Controlling Methods ----//
 function onAddPlayer(name) {
 	return game.addPlayer(name);	
 }
@@ -31,8 +38,13 @@ function onStopGame() {
 	game.stop();	
 }
 
-game.start();
-  
+
+ 
+ 
+ // ---- Game Controlling (Keyboard) ---- // 
+var directionA = 0;
+var directionB = 0;
+ 
 setInterval(function() {
     game.handleControl(playerA, directionA);
     game.handleControl(playerB, directionB);
