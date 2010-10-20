@@ -6,9 +6,9 @@ var Player = function() {
     this.name = '';
     this.color = '';
     this.ID = null;
-	this.distance = 0;
-	this.isPlaying = false;
-	this.isAlive = false;
+    this.distance = 0;
+    this.isPlaying = false;
+    this.isAlive = false;
 };
 
 Player.prototype.navigate = function(direction) {

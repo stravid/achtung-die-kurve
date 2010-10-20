@@ -1,6 +1,6 @@
 var PlayerManager = function() {
     this.players = [];
-    this.colorManager = new ColorManager(0.99, 0.99);
+    this.colorManager = new ColorManager(Config.colorSaturation, Config.colorValue);
 };
 
 PlayerManager.prototype.addPlayer = function(name) {
