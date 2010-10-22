@@ -40,32 +40,43 @@ Engine.prototype.draw = function() {
         deltaX = Math.cos(player.angle * Math.PI / 180) * speed;
         deltaY = Math.sin(player.angle * Math.PI / 180) * speed;
 		
-		if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
-			player.isAlive = false;
-			hit = true;
-			
-			var count = 0;
-			for (var j = 0; j < this.players.length; j++) {
-				if (this.players[j].isAlive) {
-					count++;
-				}
-			}
-			
-			this.checkForCallback(player.ID);
-			
-			if (count < 2) {
-				return;
-			}	
-		} 
+		if (player.hole === 0) { 
 		
-        this.drawingContext.strokeStyle = player.color;
-        this.drawingContext.fillStyle = player.color;
-        this.drawingContext.beginPath();
-        this.drawingContext.lineWidth = Config.lineWidth;
-        this.drawingContext.moveTo(player.x, player.y);
-        this.drawingContext.lineTo(player.x + deltaX, player.y + deltaY);
-        this.drawingContext.stroke();
-
+			if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
+				player.isAlive = false;
+				hit = true;
+				
+				var count = 0;
+				for (var j = 0; j < this.players.length; j++) {
+					if (this.players[j].isAlive) {
+						count++;
+					}
+				}
+				
+				this.checkForCallback(player.ID);
+				
+				if (count < 2) {
+					return;
+				}	
+			} 
+			
+			this.drawingContext.strokeStyle = player.color;
+			this.drawingContext.fillStyle = player.color;
+			this.drawingContext.beginPath();
+			this.drawingContext.lineWidth = Config.lineWidth;
+			this.drawingContext.moveTo(player.x, player.y);
+			this.drawingContext.lineTo(player.x + deltaX, player.y + deltaY);
+			this.drawingContext.stroke();
+			
+		} else {
+			
+			player.hole--;	
+			
+			if (player.hole === 0) {
+				player.calculateNextHole();
+			}
+		}
+		
         player.x += deltaX;
         player.y += deltaY;
 		player.distance += Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));

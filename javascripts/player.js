@@ -10,10 +10,15 @@ var Player = function() {
 	this.isPlaying = false;
 	this.isAlive = false;
 	this.canceled = false;
+	this.hole = 0;
+	
+	this.calculateNextHole();
 };
 
 Player.prototype.navigate = function(direction) {
     var maximumChangeOfAngle = 2;
+	
+	direction = Math.min(Math.max(direction, -1), 1);
 
     this.angle = this.angle + maximumChangeOfAngle * direction;
 
@@ -23,3 +28,12 @@ Player.prototype.navigate = function(direction) {
         this.angle += 360;
     }
 };
+
+Player.prototype.calculateNextHole = function() {
+	var that = this;
+	var time = 5 + Math.random() * 5;
+	
+	setTimeout(function() {
+		that.hole = parseInt(Config.holeSize / ((1000 / Config.frameRate / 1000) * Config.pixelsPerSecond));	
+	}, time * 1000);	
+}
