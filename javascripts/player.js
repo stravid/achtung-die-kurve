@@ -9,6 +9,7 @@ var Player = function() {
 	this.distance = 0;
 	this.isPlaying = false;
 	this.isAlive = false;
+	this.canceled = false;
 };
 
 Player.prototype.navigate = function(direction) {
