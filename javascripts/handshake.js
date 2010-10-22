@@ -73,15 +73,12 @@ function serverWebsocket() {
 			
 			// test on accelerometer messages from iphone
 			var iphoneAccel = message.match(/(\d*) ACCEL\/(.*\d\.\d*)\/(.*\d\.\d*)\/(.*\d\.\d*)/);
-			
 			if(iphoneAccel) {
-				
 				playerId = iphoneAccel[1];
 				x = iphoneAccel[2];
 				y = iphoneAccel[3];
 				z = iphoneAccel[4];
-				console.log(players[playerId])
-				game.handleControl(players[playerId], y*-3);
+				game.handleControl(players[playerId], y*4);
 			}
 		}
 	};
