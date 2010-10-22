@@ -9,8 +9,6 @@
 // Creates the Game Canvas (canvasID, width, height, fullscreen)
 var game = new Game('gameCanvas', 600, 400, false);
 
-game.start();
-
 // Creates a new Player (name)
 var playerA = game.addPlayer('Dave');
 var playerB = game.addPlayer('Dave');
@@ -25,7 +23,7 @@ game.setCollisionCallback(function (playerID) {
 
 // start the game - It is recommende to add players before starting the game
 // otherwise the game won't start.
-//game.start();
+game.start();
 
 // ---- Player Details ---- //
 // game.playerManager.getPlayerColor(playerID);
