@@ -31,7 +31,7 @@ Engine.prototype.draw = function() {
     for (var i = 0; i < this.players.length; i++) {
         player = this.players[i];
 
-		if (!player.isPlaying || !player.isAlive) {
+		if (!player.isPlaying || !player.isAlive || player.canceled) {
 			continue;
 		}
 		

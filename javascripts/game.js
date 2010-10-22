@@ -46,6 +46,14 @@ Game.prototype.addPlayer = function(name) {
     return this.playerManager.addPlayer(name);
 }
 
+Game.prototype.removePlayer = function (playerID) {
+	this.playerManager.removePlayer(playerID);	
+	
+	if (game.playerManager.numberOfPlayersAlive() < 1) {
+		game.stop();
+	}
+}
+
 Game.prototype.handleControl = function(playerID, direction) {
     this.playerManager.navigatePlayer(playerID, direction);  
 };

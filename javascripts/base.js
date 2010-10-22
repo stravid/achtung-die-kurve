@@ -21,7 +21,8 @@ game.setCollisionCallback(function (playerID) {
 	}
 });
 
-// start the game
+// start the game - It is recommende to add players before starting the game
+// otherwise the game won't start.
 game.start();
 
 
@@ -33,6 +34,10 @@ game.start();
 // ---- Game Controlling Methods ----//
 function onAddPlayer(name) {
 	return game.addPlayer(name);	
+}
+
+function onRemovePlayer(playerID) {
+	game.removePlayer(parseInt(document.getElementById('playerIDField').value));
 }
 
 function onRestartGame() {

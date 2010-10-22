@@ -9,11 +9,28 @@ PlayerManager.prototype.addPlayer = function(name) {
     newPlayer.name = name;
     newPlayer.color = this.getColor();
     newPlayer.ID = this.players.length;
-
-    this.players.push(newPlayer);
-
-    return newPlayer.ID;
+	
+	return this.playerPush(newPlayer);
 };
+
+PlayerManager.prototype.playerPush = function (newPlayer) {
+	for (var i=0; i < this.players.length; i++) {
+		var player = this.players[i];
+		
+		if (player.canceled) {
+			this.players[i] = newPlayer;
+			return i;
+		}
+	}
+	
+	this.players.push(newPlayer);
+	
+	return this.players.length - 1;
+}
+
+PlayerManager.prototype.removePlayer = function(playerID) {
+	this.getPlayerByID(playerID).canceled = true;
+}
 
 PlayerManager.prototype.initializePlayers = function() {
     for (var i = 0; i < this.players.length; i++) {
@@ -41,7 +58,7 @@ PlayerManager.prototype.numberOfPlayersAlive = function() {
     var count = 0;
 
     for (var i = 0; i < this.players.length; i++) {
-        if (this.players[i].isAlive) {
+        if (this.players[i].isAlive && !this.players[i].canceled) {
             count++;
         }
     }
