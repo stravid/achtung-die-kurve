@@ -66,6 +66,18 @@ PlayerManager.prototype.numberOfPlayersAlive = function() {
     return count;
 };
 
+PlayerManager.prototype.numberOfPlayers = function() {
+    var count = 0;
+
+    for (var i = 0; i < this.players.length; i++) {
+        if (!this.players[i].canceled) {
+            count++;
+        }
+    }
+
+    return count;
+};
+
 /* ---- GETTER & SETTER ---- */
 PlayerManager.prototype.getPlayerByID = function(playerID) {
     return this.players[playerID]; 

@@ -24,12 +24,21 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
 	
     this.playerManager = new PlayerManager();
     this.engine = new Engine(this.drawingContext, this.playerManager.players);
+	this.engineOnHalt = false;
 };
 
 Game.prototype.start = function() {
+	
+	if (this.playerManager.numberOfPlayers() === 0) {
+		this.engineOnHalt = true;
+		this.drawFrame();
+		return;
+	}
+	
 	this.drawFrame();
 	this.playerManager.initializePlayers();
-	this.engine.start();	
+	this.engine.start();
+	this.engineOnHalt = false;
 }
 
 Game.prototype.restart = function() {
@@ -43,7 +52,13 @@ Game.prototype.stop = function() {
 }
 
 Game.prototype.addPlayer = function(name) {
-    return this.playerManager.addPlayer(name);
+    var playerID = this.playerManager.addPlayer(name);
+	
+	if (this.engineOnHalt) {
+		this.start();
+	}
+	
+	return playerID;
 }
 
 Game.prototype.removePlayer = function (playerID) {
