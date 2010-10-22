@@ -4,7 +4,8 @@ var Config = {
 
     lineWidth: 3,
 
-    frameRate: 100,
+    frameRate: 35,   // rendering: frames per second
+	pixelsPerSecond: 100,  // pixels per second
     threshold: 100,
 
     colorSaturation: 0.99,

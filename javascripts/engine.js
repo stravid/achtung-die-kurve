@@ -35,8 +35,10 @@ Engine.prototype.draw = function() {
 			continue;
 		}
 		
-        deltaX = Math.cos(player.angle * Math.PI / 180) * player.speed;
-        deltaY = Math.sin(player.angle * Math.PI / 180) * player.speed;
+		var speed = Config.pixelsPerSecond * (1000 / Config.frameRate / 1000);
+		
+        deltaX = Math.cos(player.angle * Math.PI / 180) * speed;
+        deltaY = Math.sin(player.angle * Math.PI / 180) * speed;
 		
 		if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
 			player.isAlive = false;
@@ -75,6 +77,8 @@ Engine.prototype.draw = function() {
 };
 
 Engine.prototype.hitTest = function(point) {
+	
+	// FIXME: Sometimes unexpected hits.
 	
 	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > Config.threshold) {
 		return true;
