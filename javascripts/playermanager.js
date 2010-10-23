@@ -26,11 +26,11 @@ PlayerManager.prototype.playerPush = function (newPlayer) {
 	this.players.push(newPlayer);
 	
 	return this.players.length - 1;
-}
+};
 
 PlayerManager.prototype.removePlayer = function(playerID) {
 	this.getPlayerByID(playerID).canceled = true;
-}
+};
 
 PlayerManager.prototype.initializePlayers = function() {
     for (var i = 0; i < this.players.length; i++) {

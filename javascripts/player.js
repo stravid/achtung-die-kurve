@@ -36,4 +36,4 @@ Player.prototype.calculateNextHole = function() {
 	setTimeout(function() {
 		that.hole = parseInt(Config.holeSize / ((1000 / Config.frameRate / 1000) * Config.pixelsPerSecond));	
 	}, time * 1000);	
-}
+};
