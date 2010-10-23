@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1b1b1b;
+    padding: 15px;
+    font: 16px/1.5 Georgia, sans-serif;
+    color: #dddddd;
+}
+
+h1, h2 {
+    font-weight: normal;
+}
+
+h1 {
+    letter-spacing: 3px;
+    font-size: 2.3em;
+    margin-bottom: 24px;
+}
+
+ul {
+    margin-left: 30px;
+    list-style-type: square;
+    letter-spacing: 2px;
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+p {
+    margin-bottom: 24px;
+}
+
+a, a:link, a:visited {
+    color: #E3D42E;
+}
+
+a:hover, a:active {
+    color: #D2C31D;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+input[type=button] {
+    font: 16px/1.5 Georgia, sans-serif;
+}
+
+input[type=text] {
+    border: 1px solid #E3D42E;
+    background-color: transparent;
+    padding: 7px;
+    font: 16px/1.5 Georgia, sans-serif;
+    color: #dddddd;
+}
+
+select, option {
+    padding: 9px;
+    font: 16px/1.5 Georgia, sans-serif;
+    color: #dddddd;
+    border: 1px solid #E3D42E;
+    /* FIXME: no transparent possible? */
+    background-color: #1b1b1b;
+    width: 183px;
+    text-align: right;
+}
+
+form {
+    padding: 10px;
+}
+
+.hide {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}
+
+.button {
+    background-color: #E3D42E;
+    color: #000000;
+    border: 0;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+}
+
+#sidebarContainer {
+    width: 380px;
+    display: block;
+    float: right;
+}
