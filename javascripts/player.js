@@ -11,6 +11,7 @@ var Player = function() {
 	this.isAlive = false;
 	this.canceled = false;
 	this.hole = 0;
+	this.holeTimeoutID;
 	
 	this.calculateNextHole();
 };
@@ -29,11 +30,15 @@ Player.prototype.navigate = function(direction) {
     }
 };
 
+Player.prototype.resetTimeout = function() {
+	clearTimeout(this.holeTimeoutID);
+}
+
 Player.prototype.calculateNextHole = function() {
 	var that = this;
 	var time = 5 + Math.random() * 5;
 	
-	setTimeout(function() {
+	this.holeTimoutID = setTimeout(function() {
 		that.hole = parseInt(Config.holeSize / ((1000 / Config.frameRate / 1000) * Config.pixelsPerSecond));	
 	}, time * 1000);	
 };
