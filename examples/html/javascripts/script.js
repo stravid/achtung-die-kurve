@@ -34,6 +34,18 @@
                 leftKeyCode: 65,
                 rightKeyCode: 83,
                 inUse: false
+            },
+            {
+                label: 'G / H',
+                leftKeyCode: 71,
+                rightKeyCode: 72,
+                inUse: false
+            },
+            {
+                label: 'K / L',
+                leftKeyCode: 75,
+                rightKeyCode: 76,
+                inUse: false
             }
         ],
         game = new Game(canvasID, domLeftColumn.clientWidth, domLeftColumn.clientHeight, false),
@@ -74,6 +86,7 @@
             player.color = game.playerManager.getPlayerColor(player.ID);
             player.controlID = controlID;
             player.points = 0;
+            player.isAlive = true;
 
             players.push(player);
 
@@ -99,6 +112,45 @@
                     }
                 }
             }  
+        },
+        getPlayerByID = function(playerID) {
+            for (var i = 0; i < players.length; i++) {
+                if (players[i].ID == playerID) {
+                  return players[i];
+                }
+            }
+            
+            return false;  
+        },
+        handoutPoints = function() {
+            for (var i = 0; i < players.length; i++) {
+                if (players[i].isAlive) {
+                    players[i].points++;
+                }
+            }
+        },
+        setPlayersAlive = function() {
+            for (var i = 0; i < players.length; i++) {
+                players[i].isAlive = true;
+            }
+        },
+        handleCollision = function(playerID) {
+            console.log(playerID);
+
+            // FIXME: where should the points be updated?
+            if (player = getPlayerByID(playerID)) {
+                player.isAlive = false;
+                handoutPoints();
+                updatePlayerList();
+            } else {
+                throw 'No player with given ID'
+            }
+
+            if (game.playerManager.numberOfPlayersAlive() < 2) {
+                console.log('Seems like a round is over');
+                setPlayersAlive();
+                game.restart();
+            } 
         },
         updatePlayerList = function() {
             if (players.length) {
@@ -166,14 +218,7 @@
     domAddPlayerButton.onclick = handleAddPlayerClick;
     domStartGameButton.onclick = handleStartGameClick;
 
-    game.setCollisionCallback(function (playerID) {
-        
-        console.log(playerID);
-
-        if (game.playerManager.numberOfPlayersAlive() < 2) {
-            game.restart();
-        }
-    });
+    game.setCollisionCallback(handleCollision);
     
     writePlayerControls();
 })();
