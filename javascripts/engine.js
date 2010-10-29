@@ -54,23 +54,23 @@ Engine.prototype.draw = function() {
 					}
 				}
 				
-				if (count < 2) {
-					if (this.countWins) {
+				
+				if (this.countWins) {
 						
-						for (var k = 0; k < this.players.length; k++) {
-							
-							if (this.players[k].isAlive) {
-								this.players[k].wins++;
-							}
+					for (var k = 0; k < this.players.length; k++) {
+						
+						if (this.players[k].isAlive && this.players[k].isPlaying && !this.players[k].canceled ) {
+							this.players[k].wins++;
 						}
-						
 					}
 					
-					this.checkForCallback(player.ID);
+				}
+					
+				this.checkForCallback(player.ID);
+				
+				if (count < 2) {
 					return;
 				}
-				
-				this.checkForCallback(player.ID);
 			} 
 			
 			this.drawingContext.strokeStyle = player.color;
