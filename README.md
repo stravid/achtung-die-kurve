@@ -1,10 +1,13 @@
-# Achtung die Kurve
+Achtung die Kurve
+===
 
-## Authors
-[David Strauß](http://www.stravid.com)
+Authors
+---
+[David Strauß](http://www.stravid.com)  
 [Mathias Paumgarten](http://www.mathias-paumgarten.com)
 
-## Description
+Description
+---
 This is a browser-game enterily driven by Javascript. The concept is based on a game
 called "Achtung die Kurve" what is a a very old Flash based game.
 
