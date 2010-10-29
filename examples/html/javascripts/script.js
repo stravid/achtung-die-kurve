@@ -121,6 +121,7 @@
                 }
 
                 updatePlayerList();
+
                 game.restart();
             } 
         },
