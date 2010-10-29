@@ -3,9 +3,13 @@
     padding: 0;
 }
 
+html, body {
+    height: 98%;
+}
+
 body {
     background-color: #1b1b1b;
-    padding: 15px;
+    padding: 1%;
     font: 16px/1.5 Georgia, sans-serif;
     color: #dddddd;
 }
@@ -89,8 +93,17 @@ form {
     display: block;
 }
 
-#sidebarContainer {
+/** NEW **/
+
+#leftColumn {
+    width: 73%;
+    margin-right: 2%;
+    height: 100%;  
+}
+
+#rightColumn {
     width: 380px;
+    width: 25%;
     display: block;
     float: right;
 }

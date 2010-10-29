@@ -14,10 +14,10 @@
 </head>
 <body>
 
-    <div id="sidebarContainer">
+    <div id="rightColumn">
         <h1>Achtung die Kurve</h1>
         <p>
-            Achtung die Kurve is a fast paced multiplayer game. You can fork the project over at <a href="http://github.com/stravid/achtung-die-kurve/">GitHub</a>!
+            Achtung die Kurve is a fast paced multiplayer single screen game. You can fork the project over at <a href="http://github.com/stravid/achtung-die-kurve/">GitHub</a>!
         </p>
 
         <p>
@@ -25,6 +25,25 @@
             <a href="http://mathias-paumgarten.com">Mathias Paumgarten</a><br />
             <a href="http://stravid.com">David Strauß</a>
         </p>
+
+        <div id="gameContainer" class="hide">
+            <!--<h2>Game</h2>-->
+            <form>
+                <p>
+                    <!--<input type="button" id="startGame" class="button" value="Start Game" />-->
+                    <input type="button" id="stopGame" class="button hide" value="Stop Game" />
+                    <input type="button" id="restartGame" class="button hide" value="Restart Game" />
+                </p>
+            </form>
+        </div>
+
+        <div id="startGameContainer" class="hide">
+            <form>
+                <p>
+                    <input type="button" id="startGame" class="button" value="Start Game" />
+                </p>
+            </form>
+        </div>
 
         <div id="playerListContainer" class="hide">
             <h2>Players</h2>
@@ -34,32 +53,27 @@
         
         <div id="addPlayerContainer">
             <h2>Add Player</h2>
-            <form>
-                <p>
-                    <input type="text" id="playerName" placeholder="Player Name"/>
-                    <select id="playerControls">
+            <p>
+                <form>
+                    <input type="text" id="playerNameInput" placeholder="Player Name"/>
+                    <select id="playerControlsSelect">
                     </select>
                     <br />
-                    <input type="button" id="addPlayer" class="button" value="Add Player"/>
-                </p>
-            </form>
-        </div>
-
-        <div id="gameContainer" class="hide">
-            <h2>Game</h2>
-            <form>
-                <p>
-                    <input type="button" id="startGame" class="button" value="Start Game" />
-                    <input type="button" id="stopGame" class="button hide" value="Stop Game" />
-                    <input type="button" id="restartGame" class="button hide" value="Restart Game" />
-                </p>
-            </form>
-        </div>
-        
+                    <input type="button" id="addPlayerButton" class="button" value="Add Player"/>
+                </form>
+            </p>
+        </div>        
     </div>
 
-    <div>
-        <canvas id="gameCanvas"></canvas>
+    <div id="leftColumn">
+        <canvas id="canvas" class="hide"></canvas>
+
+        <div id="helpContainer" class="show">
+            <h2>Help</h2>
+            <p>
+                Add atleast two players and start playing!
+            </p>
+        </div>
     </div>
     
     <script src="../../javascripts/adk.minified.js"></script>
