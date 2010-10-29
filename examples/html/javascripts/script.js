@@ -104,8 +104,6 @@
             for (i = 0; i < array.length; i++) {
                 for (j = 0; j < array.length; j++) {
                     if (array[i][key] > array[j][key]) {
-                        console.log("%o > %o", array[i][key], array[j][key]);
-                        console.log("a: %o, b: %o", array[i], array[j]);
                         temporarySortItem = array[i];
                         array[i] = array[j];
                         array[j] = temporarySortItem;
