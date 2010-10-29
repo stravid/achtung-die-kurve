@@ -79,6 +79,12 @@ PlayerManager.prototype.numberOfPlayers = function() {
     return count;
 };
 
+PlayerManager.prototype.resetWins = function() {
+	for (var i = 0; i < this.players.length; i++) {
+		this.players[i].wins = 0;
+	}
+}
+
 /* ---- GETTER & SETTER ---- */
 PlayerManager.prototype.getPlayerByID = function(playerID) {
     return this.players[playerID]; 
@@ -94,4 +100,8 @@ PlayerManager.prototype.getPlayerDistance = function (playerID) {
 
 PlayerManager.prototype.getPlayerColor = function (playerID) {
     return this.players[playerID].color;
+};
+
+PlayerManager.prototype.getPlayerWins = function (playerID) {
+    return this.players[playerID].wins;
 };

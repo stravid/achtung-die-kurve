@@ -77,6 +77,15 @@ Game.prototype.setCollisionCallback = function (callback) {
 	this.engine.setCollisionCallback(callback);
 };
 
+Game.prototype.startSession = function() {
+	this.playerManager.resetWins();	
+	this.engine.countWins = true;
+}
+
+Game.prototype.stopSession = function() {
+	this.engine.countWins = false;
+}
+
 Game.prototype.drawFrame = function () {
 	this.drawingContext.lineWidth = 10;
 	this.drawingContext.strokeStyle = "#E3D42E";

@@ -12,6 +12,7 @@ var Player = function() {
 	this.canceled = false;
 	this.hole = 0;
 	this.holeTimeoutID;
+	this.wins = 0;
 	
 	this.calculateNextHole();
 };

@@ -4,6 +4,7 @@ var Engine = function(context, players) {
     this.players = players;
 	this.onCollision = null;
 	this.lastHit = null;
+	this.countWins = false;
 };
 
 Engine.prototype.start = function() {
@@ -53,11 +54,23 @@ Engine.prototype.draw = function() {
 					}
 				}
 				
-				this.checkForCallback(player.ID);
-				
 				if (count < 2) {
+					if (this.countWins) {
+						
+						for (var k = 0; k < this.players.length; k++) {
+							
+							if (this.players[k].isAlive) {
+								this.players[k].wins++;
+							}
+						}
+						
+					}
+					
+					this.checkForCallback(player.ID);
 					return;
-				}	
+				}
+				
+				this.checkForCallback(player.ID);
 			} 
 			
 			this.drawingContext.strokeStyle = player.color;
