@@ -112,7 +112,7 @@ Engine.prototype.hitTest = function(point) {
 	return false;
 };
 
-Engine.prototype.checkForCallback = function (ID) {
+Engine.prototype.checkForCallback = function(ID) {
 	
 	// FIXME: It's still triggering more than one callback sometimes.
 	
@@ -128,6 +128,6 @@ Engine.prototype.checkForCallback = function (ID) {
 };
 
 /* ---- Getter & Setter ---- */
-Engine.prototype.setCollisionCallback = function (callback) {
+Engine.prototype.setCollisionCallback = function(callback) {
 	this.onCollision = callback;
 };

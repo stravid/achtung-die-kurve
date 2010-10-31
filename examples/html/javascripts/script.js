@@ -18,6 +18,8 @@
         temporaryString,
         numberOfUnusedControls,
         temporarySortItem,
+        numberOfDirectionProcessesPerSecond = 100,
+        processCurrentDirectionsIntervalID,
         i,
         j,
         player,
@@ -54,12 +56,12 @@
         },
         handleKeyUp = function(event) {
             if (keysInUse[event.keyCode]) {
-                setCurrentDirection(keysInUse[event.keyCode].playerID, keysInUse[event.keyCode].direction);
+                setCurrentDirection(keysInUse[event.keyCode].playerID, 0);
             }
         },
         handleKeyDown = function(event) {
             if (keysInUse[event.keyCode]) {
-                setCurrentDirection(keysInUse[event.keyCode].playerID, 0);
+                setCurrentDirection(keysInUse[event.keyCode].playerID, keysInUse[event.keyCode].direction);
             }
         },
         handleAddPlayerClick = function() {
@@ -76,7 +78,9 @@
 
 
             game.start();
-            game.restart();
+            //game.restart();
+            game.startSession();
+            startCurrentDirectionsProcess();
         },
         addPlayer = function(name, controlID) {
             player = {};
@@ -86,7 +90,6 @@
             player.color = game.playerManager.getPlayerColor(player.ID);
             player.controlID = controlID;
             player.points = 0;
-            player.isAlive = true;
 
             players.push(player);
 
@@ -104,8 +107,6 @@
             for (i = 0; i < array.length; i++) {
                 for (j = 0; j < array.length; j++) {
                     if (array[i][key] > array[j][key]) {
-                        console.log("%o > %o", array[i][key], array[j][key]);
-                        console.log("a: %o, b: %o", array[i], array[j]);
                         temporarySortItem = array[i];
                         array[i] = array[j];
                         array[j] = temporarySortItem;
@@ -113,42 +114,14 @@
                 }
             }  
         },
-        getPlayerByID = function(playerID) {
-            for (var i = 0; i < players.length; i++) {
-                if (players[i].ID == playerID) {
-                  return players[i];
-                }
-            }
-            
-            return false;  
-        },
-        handoutPoints = function() {
-            for (var i = 0; i < players.length; i++) {
-                if (players[i].isAlive) {
-                    players[i].points++;
-                }
-            }
-        },
-        setPlayersAlive = function() {
-            for (var i = 0; i < players.length; i++) {
-                players[i].isAlive = true;
-            }
-        },
         handleCollision = function(playerID) {
-            console.log(playerID);
-
-            // FIXME: where should the points be updated?
-            if (player = getPlayerByID(playerID)) {
-                player.isAlive = false;
-                handoutPoints();
-                updatePlayerList();
-            } else {
-                throw 'No player with given ID'
-            }
-
             if (game.playerManager.numberOfPlayersAlive() < 2) {
-                console.log('Seems like a round is over');
-                setPlayersAlive();
+                for (var i = 0; i < players.length; i++) {
+                    players[i].points = game.playerManager.getPlayerWins(players[i].ID);
+                }
+
+                updatePlayerList();
+
                 game.restart();
             } 
         },
@@ -210,6 +183,14 @@
             }
 
             domPlayerControlsSelect.innerHTML = temporaryString;
+        },
+        processCurrentDirections = function() {
+            for (i in currentDirections) {
+                game.handleControl(i, currentDirections[i]);
+            }
+        },
+        startCurrentDirectionsProcess = function() {
+            processCurrentDirectionsIntervalID = setInterval(processCurrentDirections, 1000 / numberOfDirectionProcessesPerSecond);
         };
 
     window.onkeydown = handleKeyDown;
@@ -223,118 +204,9 @@
     writePlayerControls();
 })();
 /*
-var sidebarID = 'sidebarContainer',
-    canvasID = 'gameCanvas',
-    playerNameID = 'playerName',
-    playerControlsID = 'playerControls',
-    startGameID = 'startGame',
-    restartGameID = 'restartGame',
-    stopGameID= 'stopGame',
-    addPlayerID = 'addPlayer',
-    playerListID = 'playerList',
-    addPlayerContainerID = 'addPlayerContainer',
-    playerListContainerID = 'playerListContainer',
-    gameContainerID = 'gameContainer',
-    game = new Game(canvasID, document.getElementById('canvasContainer').clientWidth, document.getElementById('canvasContainer').clientHeight, false),
-    keysInUse = {},
-    directions = {},
-    listOfControls = [
-        {
-            label: 'Left / Right',
-            leftKeyCode: 37,
-            rightKeyCode: 39,
-        },
-        {
-            label: 'A / S',
-            leftKeyCode: 65,
-            rightKeyCode: 83,
-        }
-    ],
-    players = [],
-    startGame = function() {
-        document.getElementById(restartGameID).className = 'button show';
-        document.getElementById(stopGameID).className = 'button show';
-        document.getElementById(startGameID).className = 'button hide';
-
-        game.start();
-    },
-    resetGame = function() {
-        
-    },
-    stopGame = function() {
-        
-    },
-    addPlayer = function() {
-        var playerName = document.getElementById(playerNameID).value;
-        var player = {};
-        var control = document.getElementById(playerControlsID);
-
-        if (playerName.length > 1) {
-            player.ID = game.addPlayer(playerName);
-            player.name = playerName;
-            player.color = game.playerManager.getPlayerColor(player.ID);
-            players.push(player);
-
-            document.getElementById(playerNameID).value = '';
-
-            keysInUse[listOfControls[control.value].leftKeyCode] = {
-                playerID: player.ID,
-                direction: -1
-            };
-
-            keysInUse[listOfControls[control.value].rightKeyCode] = {
-                playerID: player.ID,
-                direction: 1
-            };
-
-            control.removeChild(document.getElementById('control-' + control.value));
-
-            if (control.children.length < 1) {
-                document.getElementById(addPlayerContainerID).className = 'hide';
-            }
-
-            if (players.length > 1) {
-                document.getElementById(gameContainerID).className = 'show';
-            }
-
-            document.getElementById(playerListContainerID).className = 'show';
-
-            document.getElementById(playerListID).innerHTML += '<li style="color: ' + player.color + '";>' + player.name + '</li>';
-        }
-    };
-
-window.onkeydown = function(event) {
-    if (keysInUse[event.keyCode]) {
-        directions[keysInUse[event.keyCode].playerID] = keysInUse[event.keyCode].direction;
-    }
-};
-
-window.onkeyup = function(event) {
-    if (keysInUse[event.keyCode]) {
-        directions[keysInUse[event.keyCode].playerID] = 0;
-    }
-};
-
-var htmlList = '';
-for (var i = 0; i < listOfControls.length; i++) {
-    htmlList += '<option id="control-' + i + '" value="' + i + '">' + listOfControls[i].label + '</option>';
-}
-document.getElementById(playerControlsID).innerHTML = htmlList;
-
-document.getElementById(startGameID).onclick = startGame;
-document.getElementById(restartGameID).onclick = restartGame;
-document.getElementById(stopGameID).onclick = stopGame;
-document.getElementById(addPlayerID).onclick = addPlayer;
-
 setInterval(function() {
     for (i in directions) {
         game.handleControl(i, directions[i]);
     }
 }, 10);
-
-game.setCollisionCallback(function (playerID) {
-    
-    if (game.playerManager.numberOfPlayersAlive() < 2) {
-        game.restart();
-    }
-});*/
+*/

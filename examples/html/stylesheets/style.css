@@ -1,39 +1,19 @@
-* {
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
+img, ins, q, small, strong, sub, sup, dl, dt, dd, ol, ul, li, 
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, input, select {
     margin: 0;
     padding: 0;
+    border: 0;
 }
 
-html, body {
-    height: 98%;
+article, aside, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, video, object {
+    display: block;
 }
 
-body {
-    background-color: #1b1b1b;
-    padding: 1%;
-    font: 16px/1.5 Georgia, sans-serif;
-    color: #dddddd;
-}
-
-h1, h2 {
-    font-weight: normal;
-}
-
-h1 {
-    letter-spacing: 3px;
-    font-size: 2.3em;
-    margin-bottom: 24px;
-}
-
-ul {
-    margin-left: 30px;
-    list-style-type: square;
-    letter-spacing: 2px;
-    font-size: 20px;
-    margin-bottom: 24px;
-}
-
-p {
-    margin-bottom: 24px;
+a img {
+    border: 0;
 }
 
 a, a:link, a:visited {
@@ -44,56 +24,50 @@ a:hover, a:active {
     color: #D2C31D;
 }
 
-input {
-    margin-bottom: 10px;
+.huge, h1 {
+    font-size: 37px;
+    line-height: 48px;
+    margin-bottom: 24px;
+    font-weight: normal;
+    letter-spacing: 3px;
 }
 
-input[type=button] {
-    font: 16px/1.5 Georgia, sans-serif;
+h2 {
+    font-size: 28px;
+    line-height: 48px;
+    margin-bottom: 0px;
+    font-weight: normal;
 }
 
-input[type=text] {
-    border: 1px solid #E3D42E;
-    background-color: transparent;
-    padding: 7px;
-    font: 16px/1.5 Georgia, sans-serif;
-    color: #dddddd;
+h3 {
+    font-size: 26px;
+    line-height: 36px;
+    margin-bottom: 12px;
+    font-weight: normal;
 }
 
-select, option {
-    padding: 9px;
-    font: 16px/1.5 Georgia, sans-serif;
-    color: #dddddd;
-    border: 1px solid #E3D42E;
-    /* FIXME: no transparent possible? */
+body {
+    /*background-image: url('lineheight-24px-75.png');*/
     background-color: #1b1b1b;
-    width: 183px;
-    text-align: right;
+    padding: 24px;
+    font: 16px/1.5 Georgia, sans-serif;
+    color: #dddddd;
 }
 
-form {
-    padding: 10px;
+p {
+    margin-bottom: 24px;
 }
 
-.hide {
-    display: none !important;
+ol, ul {
+    margin-bottom: 24px;
+    padding-left: 48px;
 }
 
-.show {
-    display: block !important;
-}
+/* LAYOUT */
 
-.button {
-    background-color: #E3D42E;
-    color: #000000;
-    border: 0;
-    padding: 10px;
-    cursor: pointer;
-    width: 100%;
-    display: block;
+html, body {
+    height: 98%;
 }
-
-/** NEW **/
 
 #leftColumn {
     width: 73%;
@@ -106,4 +80,55 @@ form {
     width: 25%;
     display: block;
     float: right;
+}
+
+.hide {
+    display: none !important;
+}
+
+.show {
+    display: block !important;
+}
+
+input, select, option {
+    font: 16px/1.5 Georgia, sans-serif;
+    color: #dddddd;
+}
+
+input[type=button] {
+    color: #000000;
+    border: 1px solid #E3D42E;
+    background-color: #E3D42E;
+    display: block;
+    border: 0px;
+    padding: 8px;
+    margin-bottom: 8px;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+
+input[type=text] {
+    border: 1px solid #E3D42E;
+    background-color: transparent;
+    padding: 7px;
+    margin-bottom: 8px;
+}
+
+select {
+    border: 1px solid #E3D42E;
+    background-color: #1b1b1b;
+    padding: 9px;
+    margin-bottom: 8px;
+    width: 207px;
+    text-align: right;
+}
+
+ul {
+    list-style-type: square;
+    letter-spacing: 2px;
+}
+
+.yellow {
+    color: #E3D42E;
 }
