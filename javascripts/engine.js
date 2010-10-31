@@ -69,7 +69,6 @@ Engine.prototype.draw = function() {
 				this.checkForCallback(player.ID);
 				
 				if (count < 2) {
-					this.stop();
 					return;
 				}
 			} 
