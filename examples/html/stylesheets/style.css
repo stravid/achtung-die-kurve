@@ -132,3 +132,7 @@ ul {
 .yellow {
     color: #E3D42E;
 }
+
+#helpContainer p {
+    width: 75%;
+}
