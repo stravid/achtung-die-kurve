@@ -46,14 +46,13 @@ Engine.prototype.draw = function() {
 			if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
 				player.isAlive = false;
 				hit = true;
-				
+
 				var count = 0;
 				for (var j = 0; j < this.players.length; j++) {
 					if (this.players[j].isAlive) {
 						count++;
 					}
 				}
-				
 				
 				if (this.countWins) {
 						
@@ -95,6 +94,7 @@ Engine.prototype.draw = function() {
 		player.distance += Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     } 
 	
+    // FIXME: isnt needed anymore!
 	if (!hit) {
         this.lastHit = null;
     }

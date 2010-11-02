@@ -27,6 +27,10 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
 	this.engineOnHalt = false;
 };
 
+Game.prototype.getDrawingContext = function() {
+    return this.drawingContext;  
+};
+
 Game.prototype.start = function() {
 	
 	if (this.playerManager.numberOfPlayers() === 0) {

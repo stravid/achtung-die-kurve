@@ -20,6 +20,9 @@
         temporarySortItem,
         numberOfDirectionProcessesPerSecond = 100,
         processCurrentDirectionsIntervalID,
+        endscreenPlayers = [],
+        killList = [],
+        scoreList = [],
         i,
         j,
         player,
@@ -51,6 +54,7 @@
             }
         ],
         game = new Game(canvasID, domLeftColumn.clientWidth, domLeftColumn.clientHeight, false),
+        drawingContext = game.getDrawingContext(),
         setCurrentDirection = function(playerID, direction) {
             currentDirections[playerID] = direction;   
         },
@@ -115,26 +119,66 @@
             }  
         },
         handleCollision = function(playerID) {
+            killList.unshift(playerID);
+
             if (game.playerManager.numberOfPlayersAlive() < 2) {
+                game.stop();
+
+                setTimeout(function() {
+                    game.restart();
+                }, 3000);
+
                 for (var i = 0; i < players.length; i++) {
                     players[i].points = game.playerManager.getPlayerWins(players[i].ID);
                 }
 
                 updatePlayerList();
 
-                game.restart();
+                for (var i = 0; i < players.length; i++) {
+                    var isIncluded = false;
+
+                    for (var j = 0; j < killList.length; j++) {
+                        if (players[i].ID == killList[j]) {
+                            isIncluded = true;
+                            break;
+                        }
+                    }
+
+                    if (!isIncluded) {
+                        killList.unshift(players[i].ID);
+                        break;
+                    }
+                }
+
+                drawEndScreen();
+
+                killList = [];
             } 
+        },
+        drawEndScreen = function() {
+            drawingContext.font = "50px Georgia serif";
+            drawingContext.textAlign = 'center';
+            var start = (domLeftColumn.clientHeight / 2) - (50 * players.length) / 2
+
+            for (var i = 0; i < killList.length; i++) {
+                drawingContext.fillStyle = players[killList[i]].color;
+                drawingContext.fillText(i + 1 + '. ' + players[killList[i]].name, domLeftColumn.clientWidth / 2, start + i * 50);
+            }
         },
         updatePlayerList = function() {
             if (players.length) {
                 domPlayerListContainer.className = 'show';
 
-                sort(players, 'points');
+                for (var i = 0; i < players.length; i++) {
+                    scoreList[i] = players[i];
+                }
+
+                sort(scoreList, 'points');
 
                 temporaryString = '';
 
-                for (var i = 0; i < players.length; i++) {
-                    temporaryString += '<li style="color:' + players[i].color + ';"> ' + players[i].name + ' - ' + players[i].points + '  points</li>';
+                for (var i = 0; i < scoreList.length; i++) {
+                    temporaryString += '<li style="color:' + scoreList[i].color + ';"> ' + scoreList[i].name + ' - ' + scoreList[i].points + '  points</li>';
                 }
 
                 domPlayerList.innerHTML = temporaryString;
@@ -203,10 +247,3 @@
     
     writePlayerControls();
 })();
-/*
-setInterval(function() {
-    for (i in directions) {
-        game.handleControl(i, directions[i]);
-    }
-}, 10);
-*/
