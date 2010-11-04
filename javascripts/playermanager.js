@@ -8,9 +8,8 @@ PlayerManager.prototype.addPlayer = function(name) {
     
     newPlayer.name = name;
     newPlayer.color = this.getColor();
-    newPlayer.ID = this.players.length;
 	
-	return this.playerPush(newPlayer);
+    return newPlayer.ID = this.playerPush(newPlayer);
 };
 
 PlayerManager.prototype.playerPush = function (newPlayer) {
@@ -79,29 +78,42 @@ PlayerManager.prototype.numberOfPlayers = function() {
     return count;
 };
 
-PlayerManager.prototype.resetWins = function() {
+PlayerManager.prototype.resetScores = function() {
 	for (var i = 0; i < this.players.length; i++) {
 		this.players[i].wins = 0;
+		this.players[i].distane = 0;
 	}
-}
+};
 
 /* ---- GETTER & SETTER ---- */
 PlayerManager.prototype.getPlayerByID = function(playerID) {
     return this.players[playerID]; 
 };
 
-PlayerManager.prototype.getPlayerName = function (playerID) {
+PlayerManager.prototype.getPlayerName = function(playerID) {
     return this.players[playerID].name;
 };
 
-PlayerManager.prototype.getPlayerDistance = function (playerID) {
+PlayerManager.prototype.getPlayerDistance = function(playerID) {
     return this.players[playerID].distance;
 };
 
-PlayerManager.prototype.getPlayerColor = function (playerID) {
+PlayerManager.prototype.getPlayerColor = function(playerID) {
     return this.players[playerID].color;
 };
 
-PlayerManager.prototype.getPlayerWins = function (playerID) {
+PlayerManager.prototype.getPlayerWins = function(playerID) {
     return this.players[playerID].wins;
+};
+
+PlayerManager.prototype.getAlivePlayers = function() {
+	var alivePlayers = [];
+	
+	for (var i = 0; i < this.players.length; i++) {
+        if (this.players[i].isAlive && !this.players[i].canceled) {
+            alivePlayers.push(this.players[i].ID);
+        }
+    }
+	
+	return alivePlayers;
 };
