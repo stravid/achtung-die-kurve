@@ -82,10 +82,14 @@ Game.prototype.setCollisionCallback = function(callback) {
 };
 
 Game.prototype.setRoundCallback = function(callback) {
+	that = this;
+	
 	this.engine.setRoundCallback(function() {
-			
+		var stats = {
+			winnerID: that.playerManager.getAlivePlayers()[0]
+		}
 		
-		callback();
+		callback(stats);
 	});
 };
 
