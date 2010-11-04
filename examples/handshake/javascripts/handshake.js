@@ -80,6 +80,14 @@ function serverWebsocket() {
 				z = iphoneAccel[4];
 				game.handleControl(players[playerId], y*4);
 			}
+			
+			// test on web client gamer with left and right buttons
+			var webClient = message.match(/(\d*) dir (.*\d)/);
+			if(webClient) {
+				playerId = webClient[1];
+				var dir = webClient[2];
+				game.handleControl(players[playerId], dir);
+			}
 		}
 	};
 	server.onerror = function(evt) { 
