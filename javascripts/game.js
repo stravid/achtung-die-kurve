@@ -85,8 +85,11 @@ Game.prototype.setRoundCallback = function(callback) {
 	that = this;
 	
 	this.engine.setRoundCallback(function() {
+		that.engine.playerRank.unshift(that.playerManager.getAlivePlayers()[0]);
+		
 		var stats = {
-			winnerID: that.playerManager.getAlivePlayers()[0]
+			winnerID: that.playerManager.getAlivePlayers()[0],
+			rank: that.engine.playerRank
 		}
 		
 		callback(stats);
@@ -94,7 +97,7 @@ Game.prototype.setRoundCallback = function(callback) {
 };
 
 Game.prototype.startSession = function() {
-	this.playerManager.resetWins();	
+	this.playerManager.resetScores();
 	this.engine.countWins = true;
 };
 

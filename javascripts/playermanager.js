@@ -78,11 +78,12 @@ PlayerManager.prototype.numberOfPlayers = function() {
     return count;
 };
 
-PlayerManager.prototype.resetWins = function() {
+PlayerManager.prototype.resetScores = function() {
 	for (var i = 0; i < this.players.length; i++) {
 		this.players[i].wins = 0;
+		this.players[i].distane = 0;
 	}
-}
+};
 
 /* ---- GETTER & SETTER ---- */
 PlayerManager.prototype.getPlayerByID = function(playerID) {

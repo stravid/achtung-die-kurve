@@ -6,10 +6,13 @@ var Engine = function(context, players) {
 	this.onRoundOver = null;
 	this.lastHit = null;
 	this.countWins = false;
+	this.playerRank;
 };
 
 Engine.prototype.start = function() {
     var that = this;
+	
+	this.playerRank = [];
 	
     if (this.intervalID === 0) {
         this.intervalID = setInterval(function() {
@@ -45,25 +48,22 @@ Engine.prototype.draw = function() {
 		if (player.hole === 0) { 
 		
 			if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
+				
+				this.playerRank.unshift(player.ID);
+				
 				player.isAlive = false;
 				hit = true;
 
 				var count = 0;
 				for (var j = 0; j < this.players.length; j++) {
 					if (this.players[j].isAlive) {
+						
 						count++;
-					}
-				}
-				
-				if (this.countWins) {
 						
-					for (var k = 0; k < this.players.length; k++) {
-						
-						if (this.players[k].isAlive && this.players[k].isPlaying && !this.players[k].canceled ) {
-							this.players[k].wins++;
+						if (this.countWins) {
+							this.players[j].wins++;
 						}
 					}
-					
 				}
 				
 				if (count < 2) this.stop();
