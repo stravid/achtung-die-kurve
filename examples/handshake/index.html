@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Achtung die Kurve</title>
+
+    <meta charset="utf-8"/>
+    <meta name="description" content="HTML5 version of 'Achtung die Kurve'." />
+
+    <meta name="author" content="Mathias Paumgarten" /> 
+    <meta name="author" content="David Strauß" />
+
+    <link href='./stylesheets/style.css' rel='stylesheet' type='text/css'>
+    
+</head>
+<body>
+
+    <div id="rightColumn">
+        <h1>Achtung die Kurve</h1>
+        <p>
+            Achtung die Kurve is a fast paced multiplayer single screen game. You can fork the project over at <a href="http://github.com/stravid/achtung-die-kurve/">GitHub</a>!
+        </p>
+
+        <p>
+            Created by<br />
+            <a href="http://mathias-paumgarten.com">Mathias Paumgarten</a><br />
+            <a href="http://stravid.com">David Strauß</a>
+        </p>
+
+        <form onsubmit="return false;">
+            <div id="startGameContainer" class="hide">
+                <fieldset>
+                    <input type="button" id="startGame" class="button" value="Start Game" />
+                </fieldset>
+            </div>
+            <div id="playerListContainer" class="hide">
+                <h2>Players</h2>
+                <ul id="playerList">
+                </ul>
+            </div>
+            <div id="addPlayerContainer">
+                <h2>Add Player</h2>
+                <fieldset>
+                    <input type="text" id="playerNameInput" placeholder="Player Name"/>
+                    <select id="playerControlsSelect"></select>
+                    <br />
+                    <input type="button" id="addPlayerButton" class="button" value="Add Player"/>
+                </fieldset>
+            </div>
+        </form>              
+    </div>
+
+    <div id="leftColumn">
+        <canvas id="canvas" class="hide"></canvas>
+
+        <div id="helpContainer" class="show">
+            <h2 class="huge">Help</h2>
+            <h3 class="yellow">Introduction</h3>
+            <p>
+                In <strong>Achtung die Kurve</strong> you are a colored line constantly moving forward, you can only change the direction you are heading. The goal of the game is to be the last moving line on the screen. To achieve this you have to dodge the other players, the borders and even yourself. So watch out and move around savely!
+            </p>
+            <p>
+                <strong>Achtung die Kurve is played on a single screen, so make sure you have some friends around!</strong>
+            </p>
+            <h3 class="yellow">Getting Started</h3>
+            <p>
+                In order to play you have to add atleast two players. To do so you type in the players name in the input field on the right hand side and choose a pair of keys to control the line. Then click on the "Add Player" button and the new player is listed in the player list. The color helps you to identify your line in the game.
+            </p>
+            <p>
+                Once you have added two players you get the "Start Game" button, located above the list of players. Press it. A new game starts. Enjoy.
+            </p>
+        </div>
+    </div>
+    
+    <script src="../../javascripts/adk.minified.js"></script>
+    <script src="./javascripts/script.js"></script>
+</body>    
+</html>
