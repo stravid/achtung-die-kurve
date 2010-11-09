@@ -71,7 +71,7 @@ game.startSession();
 * of the current game and the ranking of the current game. 
 */
 game.setRoundCallback(function(stats) {
-    console.log("the winnerID is %1 ", stats.winnerID);
+    console.log("the winnerID is %i ", stats.winnerID);
     console.log("Ranks: %o", stats.rank); // prints an array including the IDs of the player
 });
 
