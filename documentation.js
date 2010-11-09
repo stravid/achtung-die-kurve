@@ -2,8 +2,8 @@
 * ========================================
 * This is a short paragraph on how to implement "Achtung die Kurve" on your own pace.
 * ========================================
-*/
-/*
+*
+*
 * Creates a new game.
 *
 * Parameter: canvasID : string
