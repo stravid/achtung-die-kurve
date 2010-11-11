@@ -64,7 +64,7 @@ game.startSession();
 /*
 * Stops the counting of scroes for each player. Doesn't reset scores.
 */
-game.startSession();
+game.stopSession();
 
 /*
 * Sets a callback after every round containing a few stats. Including the winner
