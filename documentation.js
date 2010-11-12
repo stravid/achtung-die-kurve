@@ -25,20 +25,20 @@ var myPlayerID = game.addPlayer("Mathias");
 /*
 * Sets a callback to be triggered everytime a player dies.
 *
-* Parameter: callback : funtion
+* Parameter: callback : function
 */
-game.setCollisionCallback(function (deadPlayer) {
-    console.log ("Player with ID %i just died.");
+game.setCollisionCallback(function (playerID) {
+    console.log ("Player with ID %i just died.", playerID);
 });
 
 /*
-* Starts the game. With this action it imediatly starts drawing the lines.
+* Starts the game. With this action it immediatly starts drawing the lines.
 */
 game.start();
 
 /*
 * Restarts the game at any point. This method doesn't drop the score that has been
-* set till now
+* set till now.
 */
 game.restart();
 
@@ -56,13 +56,13 @@ game.stop();
 */
 
 /*
-* Starts a mechanism that tracks the scroe of each player over multiple games
+* Starts a mechanism that tracks the score of each player over multiple games
 * until you force the mechanism to stop.
 */
 game.startSession();
 
 /*
-* Stops the counting of scroes for each player. Doesn't reset scores.
+* Stops the counting of scores for each player. Doesn't reset scores.
 */
 game.stopSession();
 
@@ -72,14 +72,16 @@ game.stopSession();
 */
 game.setRoundCallback(function(stats) {
     console.log("the winnerID is %i ", stats.winnerID);
-    console.log("Ranks: %o", stats.rank); // prints an array including the IDs of the player
+
+    // prints an array including the IDs of the player
+    console.log("Ranks: %o", stats.rank); 
 });
 
 
 /* 
 * ========================================
 * There are a few accessors for info on each player. Playerinfo is always accessed over the 
-* playerID. All players are managed and controlled over the playermanager.
+* playerID. All players are managed and controlled over the PlayerManager.
 * ========================================
 */
 
@@ -89,7 +91,7 @@ game.setRoundCallback(function(stats) {
 */
 
 /*
-* Returns the color of a player.
+* Returns the hex color of a player.
 *
 * Parameter: playerID : int
 *
