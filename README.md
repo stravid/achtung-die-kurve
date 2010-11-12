@@ -14,5 +14,5 @@ lead to a situation where you can't go anywhere without crashing someone or some
 The [documentation](https://github.com/stravid/achtung-die-kurve/blob/master/documentation.js) describes how to implement Achtung die Kurve on your very own website. There is also a [online demo](http://stravid.com/projects/achtung-die-kurve/)!
 
 ### Authors ###
-David Strauß ([(stravid.com)](http://www.stravid.com))
+David Strauß ([stravid.com](http://www.stravid.com))  
 Mathias Paumgarten ([mathias-paumgarten.com](http://www.mathias-paumgarten.com))
