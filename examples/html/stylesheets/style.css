@@ -76,7 +76,6 @@ html, body {
 }
 
 #rightColumn {
-    width: 380px;
     width: 25%;
     display: block;
     float: right;
@@ -113,6 +112,28 @@ input[type=text] {
     background-color: transparent;
     padding: 7px;
     margin-bottom: 8px;
+    width: 100%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+fieldset {
+    width: 100%;
+}
+
+/* DIRTY HACK */
+
+table {
+    width: 100%
+}
+
+.left {
+    width: 100%;
+}
+
+.right {
+    width: auto;
+    padding-left: 20px;
 }
 
 select {
@@ -120,8 +141,10 @@ select {
     background-color: #1b1b1b;
     padding: 9px;
     margin-bottom: 8px;
-    width: 207px;
     text-align: right;
+    display: inline-block;
+    margin-left: 5px;
+    width: auto;
 }
 
 ul {
