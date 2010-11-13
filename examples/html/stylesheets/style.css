@@ -159,3 +159,13 @@ ul {
 #helpContainer p {
     width: 75%;
 }
+
+li span {
+    display: none;
+    cursor: pointer;
+    color: red;
+}
+
+li:hover span {
+    display: inline-block;
+}

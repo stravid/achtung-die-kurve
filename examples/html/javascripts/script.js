@@ -73,7 +73,7 @@ var Game = Game || {};
         processCurrentDirections = function() {
             for (var playerID in currentDirections) {
                 if (currentDirections.hasOwnProperty(playerID)) {
-                    game.handleControl(playerID, currentDirections[i]);
+                    game.handleControl(playerID, currentDirections[playerID]);
                 }
             }
         },
@@ -128,8 +128,12 @@ var Game = Game || {};
             if (players.length) {
                 domPlayerListContainer.className = 'show';
 
+                scoreList = [];
+
                 for (i = 0; i < players.length; i++) {
-                    scoreList[i] = players[i];
+                    if (players[i].isPlaying) {
+                        scoreList.push(players[i]);
+                    }
                 }
 
                 sort(scoreList, 'points');
@@ -137,7 +141,7 @@ var Game = Game || {};
                 temporaryString = '';
 
                 for (i = 0; i < scoreList.length; i++) {
-                    temporaryString += '<li style="color:' + scoreList[i].color + ';"> ' + scoreList[i].name + ' - ' + scoreList[i].points + '  points</li>';
+                    temporaryString += '<li id="' + scoreList[i].ID + '" style="color:' + scoreList[i].color + ';"> ' + scoreList[i].name + ' - ' + scoreList[i].points + '  points <span>Remove</span></li>';
                 }
 
                 domPlayerList.innerHTML = temporaryString;
@@ -171,6 +175,7 @@ var Game = Game || {};
             player.color = game.playerManager.getPlayerColor(player.ID);
             player.controlID = controlID;
             player.points = 0;
+            player.isPlaying = true;
 
             players.push(player);
 
@@ -180,7 +185,7 @@ var Game = Game || {};
             updatePlayerList();
             checkPlayerLimit();
 
-            if (players.length > 1) {
+            if (players.length > 1 && domStartGameContainer.className == 'hide') {
                 domStartGameContainer.className = 'show';
             }
         },
@@ -207,7 +212,9 @@ var Game = Game || {};
             roundResult = statistics.rank;
 
             for (i = 0; i < players.length; i++) {
-                players[i].points = game.playerManager.getPlayerWins(players[i].ID);
+                if (players[i].isPlaying) {
+                    players[i].points = game.playerManager.getPlayerWins(players[i].ID);   
+                }
             }
 
             updatePlayerList();
@@ -216,6 +223,35 @@ var Game = Game || {};
             setTimeout(function() {
                 game.restart();
             }, 2500);
+        },
+        removePlayer = function(playerID) {
+            playerID = parseInt(playerID, 10);
+
+            game.removePlayer(playerID);
+            var index = -1;
+
+            for (i = 0; i < players.length; i++) {
+                if (players[i].ID == playerID) {
+                    index = i;
+                    break;
+                }
+            }
+
+            delete keysInUse[listOfControls[players[i].controlID].leftKeyCode];
+            delete keysInUse[listOfControls[players[i].controlID].rightKeyCode];
+            delete currentDirections[playerID];
+            listOfControls[players[i].controlID].inUse = false;
+
+            players[index].isPlaying = false;
+
+            writePlayerControls();
+
+            updatePlayerList();
+        },
+        handleRemovePlayerClick = function(event) {
+            if (event.target.nodeName.toUpperCase() == 'SPAN') {
+                removePlayer(event.target.parentNode.id);
+            }
         };
 
     window.onkeydown = handleKeyDown;
@@ -223,6 +259,8 @@ var Game = Game || {};
     
     domAddPlayerButton.onclick = handleAddPlayerClick;
     domStartGameButton.onclick = handleStartGameClick;
+
+    domPlayerList.onclick = handleRemovePlayerClick;
 
     game.setRoundCallback(handleRoundEnd);
     
