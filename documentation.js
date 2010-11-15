@@ -23,6 +23,13 @@ var game = new Game("myCanvas", 500, 700, false);
 var myPlayerID = game.addPlayer("Mathias");
 
 /*
+* Removes a Player from the current game. The player will be left out, when the next round starts.
+*
+* Parameter: playerID : int
+*/
+game.removePlayer(myPlayerID);
+
+/*
 * Sets a callback to be triggered everytime a player dies.
 *
 * Parameter: callback : funtion
