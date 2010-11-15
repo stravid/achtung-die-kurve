@@ -3,18 +3,18 @@ var Game = function(canvasID, canvasWidth, canvasHeight /*, useFullscreen */) {
         this.useFullscreen = arguments[3];
     }
 
-    Config.width = canvasWidth;
-    Config.height = canvasHeight;
+    Config.canvasWidth = canvasWidth;
+    Config.canvasHeight = canvasHeight;
 	
     this.canvasElement = document.getElementById(canvasID);
 
     if (this.useFullscreen) {
-        Config.width = window.innerWidth;
-        Config.height = window.innerHeight;
+        Config.canvasWidth = window.innerWidth;
+        Config.canvasHeight = window.innerHeight;
     }
 
-    this.canvasElement.width = Config.width;
-    this.canvasElement.height = Config.height; 
+    this.canvasElement.width = Config.canvasWidth;
+    this.canvasElement.height = Config.canvasHeight; 
     
     if (this.canvasElement.getContext) {
         this.drawingContext = this.canvasElement.getContext('2d');
@@ -33,7 +33,7 @@ Game.prototype.getDrawingContext = function() {
 
 Game.prototype.start = function() {
 	
-	if (this.playerManager.numberOfPlayers() < 2) {
+	if (this.playerManager.numberOfPlayers() === 0) {
 		this.engineOnHalt = true;
 		this.drawFrame();
 		return;
@@ -47,7 +47,7 @@ Game.prototype.start = function() {
 
 Game.prototype.restart = function() {
 	this.engine.stop();
-	this.drawingContext.clearRect(0, 0, Config.width, Config.height);
+	this.drawingContext.clearRect(0, 0, Config.canvasWidth, Config.canvasHeight);
 	this.start();
 };
 
@@ -66,14 +66,10 @@ Game.prototype.addPlayer = function(name) {
 };
 
 Game.prototype.removePlayer = function (playerID) {
-	this.playerManager.removePlayer(playerID);
+	this.playerManager.removePlayer(playerID);	
 	
-	if (this.playerManager.numberOfPlayersAlive() < 2) {
-		this.stop();
-
-        if (this.engine.onRoundOver) {
-            this.engine.onRoundOver();
-        }
+	if (game.playerManager.numberOfPlayersAlive() < 1) {
+		game.stop();
 	}
 };
 
@@ -112,5 +108,6 @@ Game.prototype.stopSession = function() {
 Game.prototype.drawFrame = function () {
 	this.drawingContext.lineWidth = 10;
 	this.drawingContext.strokeStyle = "#E3D42E";
-	this.drawingContext.strokeRect(0, 0, Config.width - 0, Config.height - 0);
+	this.drawingContext.strokeRect(0, 0, Config.canvasWidth - 0, Config.canvasHeight - 0);
 };
+
