@@ -35,8 +35,8 @@ PlayerManager.prototype.initializePlayers = function() {
     for (var i = 0; i < this.players.length; i++) {
         var player = this.players[i];
 
-        player.x = Utilities.random(Config.width / 4, 3 * Config.width / 4);
-        player.y = Utilities.random(Config.height / 4, 3 * Config.height / 4);
+        player.x = Utilities.random(Config.canvasWidth / 4, 3 * Config.canvasWidth / 4);
+        player.y = Utilities.random(Config.canvasHeight / 4, 3 * Config.canvasHeight / 4);
         player.angle = Math.random() * 360;	
         player.isPlaying = true;
         player.isAlive = true;
