@@ -40,7 +40,7 @@ PlayerManager.prototype.initializePlayers = function() {
         player.angle = Math.random() * 360;	
         player.isPlaying = true;
         player.isAlive = true;
-		player.resetTimeout();
+	player.resetTimeout();
     }
 };
 
