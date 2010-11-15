@@ -7,27 +7,28 @@ var Engine = function(context, players) {
 	this.lastHit = null;
 	this.countWins = false;
 	this.playerRank;
+	this.intervalEngine = new IntervalEngine(this);
+	
+	this.intervalEngine.setCallback(this.draw);
 };
 
 Engine.prototype.start = function() {
-    var that = this;
 	
 	this.playerRank = [];
 	
     if (this.intervalID === 0) {
-        this.intervalID = setInterval(function() {
-            that.draw();
-        }, 1000 / Config.frameRate);    
+    	this.intervalEngine.setInterval(Math.min(40, Config.frameRate));
     }
 };
 
 Engine.prototype.stop = function() {
-    clearInterval(this.intervalID);
+    this.intervalEngine.clearInterval();
     
     this.intervalID = 0; 
 };
 
-Engine.prototype.draw = function() {
+Engine.prototype.draw = function(delayRatio) {
+	
     var player,
         deltaX,
         deltaY,
@@ -41,6 +42,8 @@ Engine.prototype.draw = function() {
 		}
 		
 		var speed = Config.pixelsPerSecond * (1000 / Config.frameRate / 1000);
+		
+		speed /= delayRatio;
 		
         deltaX = Math.cos(player.angle * Math.PI / 180) * speed;
         deltaY = Math.sin(player.angle * Math.PI / 180) * speed;
