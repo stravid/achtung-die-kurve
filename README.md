@@ -1,17 +1,18 @@
-Achtung die Kurve
+Achtung die Kurve ([Online Demo](http://stravid.com/projects/achtung-die-kurve/))
 ===
 
-Authors
----
-[David Strauß](http://www.stravid.com)  
-[Mathias Paumgarten](http://www.mathias-paumgarten.com)
-
-Description
----
-This is a browser-game enterily driven by Javascript. The concept is based on a game
+### Description ###
+This is a browser game entirely driven by JavaScript. The concept is based on a game
 called "Achtung die Kurve" what is a a very old Flash based game.
 
 In this game you play a line which can be controlled by any device, usually the keyboard.
-By controlling you can decide to curve the line in any direction you desire. As long as you
-don't hit any other player of the frame your line is constantly growing which will eventually 
+The line is constantly moving forward so the player has only control over the direction of the line.
+As long as you don't hit any other player or the border your line is constantly growing which will eventually 
 lead to a situation where you can't go anywhere without crashing someone or something.
+
+### Documentation ###
+The [documentation](https://github.com/stravid/achtung-die-kurve/blob/master/documentation.js) describes how to implement Achtung die Kurve on your very own website. There is also a [online demo](http://stravid.com/projects/achtung-die-kurve/)!
+
+### Authors ###
+David Strauß ([stravid.com](http://www.stravid.com))  
+Mathias Paumgarten ([mathias-paumgarten.com](http://www.mathias-paumgarten.com))
