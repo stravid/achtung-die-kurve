@@ -9,9 +9,7 @@ PlayerManager.prototype.addPlayer = function(name) {
     newPlayer.name = name;
     newPlayer.color = this.getColor();
 	
-    newPlayer.ID = this.players.length;
-
-    return this.playerPush(newPlayer);
+    return newPlayer.ID = this.playerPush(newPlayer);
 };
 
 PlayerManager.prototype.playerPush = function (newPlayer) {

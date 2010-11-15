@@ -30,11 +30,11 @@
     <div id="rightColumn">
         <h1>Achtung die Kurve</h1>
         <p>
-            Play with your friends on a single keyboard and try to survive as long as possible!
-            You can fork the project over at <a href="http://github.com/stravid/achtung-die-kurve/">GitHub</a>!
+            Achtung die Kurve is a fast paced multiplayer single screen game. You can fork the project over at <a href="http://github.com/stravid/achtung-die-kurve/">GitHub</a>!
         </p>
 
         <p>
+            Created by<br />
             <a href="http://mathias-paumgarten.com">Mathias Paumgarten</a><br />
             <a href="http://stravid.com">David Strauß</a>
         </p>
@@ -53,21 +53,13 @@
             <div id="addPlayerContainer">
                 <h2>Add Player</h2>
                 <fieldset>
-                    <table cellspacing="0" cellpadding="0">
-                        <tr>
-                            <td class="left">
-                                <input type="text" id="playerNameInput" placeholder="Player Name"/>
-                            </td>
-                            <td class="right">
-                                <select id="playerControlsSelect"></select>                                
-                            </td>
-                        </tr>
-                    </table>
+                    <input type="text" id="playerNameInput" placeholder="Player Name"/>
+                    <select id="playerControlsSelect"></select>
                     <br />
                     <input type="button" id="addPlayerButton" class="button" value="Add Player"/>
                 </fieldset>
             </div>
-        </form>       
+        </form>              
     </div>
 
     <div id="leftColumn">
@@ -77,11 +69,7 @@
             <h2 class="huge">Help</h2>
             <h3 class="yellow">Introduction</h3>
             <p>
-                The goal of the game is to survive as long as possible. You and your friends share the keyboard to control the line.
-                The lines are constantly moving forward. The players can only adjust the direction of the line.
-            </p>
-            <p>
-                A player loses if his line touches a line or the border of the game. He then has to wait for the start of the next round to play again. For every player you survive you get a point.
+                In <strong>Achtung die Kurve</strong> you are a colored line constantly moving forward, you can only change the direction you are heading. The goal of the game is to be the last moving line on the screen. To achieve this you have to dodge the other players, the borders and even yourself. So watch out and move around savely!
             </p>
             <p>
                 <strong>Achtung die Kurve is played on a single screen, so make sure you have some friends around!</strong>
@@ -96,13 +84,6 @@
         </div>
     </div>
     
-    <!--<script src="../../javascripts/utilities.js"></script>
-    <script src="../../javascripts/config.js"></script>
-    <script src="../../javascripts/player.js"></script>
-    <script src="../../javascripts/colormanager.js"></script>
-    <script src="../../javascripts/playermanager.js"></script>
-    <script src="../../javascripts/engine.js"></script>
-    <script src="../../javascripts/game.js"></script>-->
     <script src="./javascripts/adk.minified.js"></script>
     <script src="./javascripts/script.js"></script>
 </body>    

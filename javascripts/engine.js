@@ -50,14 +50,13 @@ Engine.prototype.draw = function() {
 			if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
 				
 				this.playerRank.unshift(player.ID);
-                console.log('Unshift: %s', player.ID)
 				
 				player.isAlive = false;
 				hit = true;
 
 				var count = 0;
 				for (var j = 0; j < this.players.length; j++) {
-					if (this.players[j].isAlive && this.players[j].isPlaying && !this.players[j].canceled) {
+					if (this.players[j].isAlive) {
 						
 						count++;
 						
@@ -75,7 +74,7 @@ Engine.prototype.draw = function() {
 					if (this.onRoundOver) {
 						this.onRoundOver();
 					}
-
+					
 					return;
 				}
 			} 
@@ -110,7 +109,7 @@ Engine.prototype.draw = function() {
 Engine.prototype.hitTest = function(point) {
 	
 	// FIXME: Sometimes unexpected hits.
-
+	
 	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > Config.threshold) {
 		return true;
 	}
