@@ -114,6 +114,10 @@ Engine.prototype.hitTest = function(point) {
 		return true;
 	}
 
+    if (point.x > Config.canvasWidth || point.y > Config.canvasHeight || point.x < 0 || point.y < 0) {
+        return true;
+    }
+
 	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > Config.threshold) {
 		return true;
 	}

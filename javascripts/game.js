@@ -110,3 +110,4 @@ Game.prototype.drawFrame = function () {
 	this.drawingContext.strokeStyle = "#E3D42E";
 	this.drawingContext.strokeRect(0, 0, Config.canvasWidth - 0, Config.canvasHeight - 0);
 };
+
