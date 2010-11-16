@@ -56,7 +56,7 @@ Engine.prototype.draw = function() {
 
 				var count = 0;
 				for (var j = 0; j < this.players.length; j++) {
-					if (this.players[j].isAlive) {
+					if (this.players[j].isAlive && this.players[j].isPlaying && !this.players[j].canceled) {
 						
 						count++;
 						
@@ -74,7 +74,7 @@ Engine.prototype.draw = function() {
 					if (this.onRoundOver) {
 						this.onRoundOver();
 					}
-					
+
 					return;
 				}
 			} 
@@ -109,10 +109,6 @@ Engine.prototype.draw = function() {
 Engine.prototype.hitTest = function(point) {
 	
 	// FIXME: Sometimes unexpected hits.
-	
-	if (point.x > Config.canvasWidth || point.y > Config.canvasHeight || point.x < 0 || point.y < 0) {
-		return true;
-	}
 
     if (point.x > Config.canvasWidth || point.y > Config.canvasHeight || point.x < 0 || point.y < 0) {
         return true;

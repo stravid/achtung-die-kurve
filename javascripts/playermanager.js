@@ -9,7 +9,9 @@ PlayerManager.prototype.addPlayer = function(name) {
     newPlayer.name = name;
     newPlayer.color = this.getColor();
 	
-    return newPlayer.ID = this.playerPush(newPlayer);
+    newPlayer.ID = this.players.length;
+
+    return this.playerPush(newPlayer);
 };
 
 PlayerManager.prototype.playerPush = function (newPlayer) {
@@ -40,7 +42,7 @@ PlayerManager.prototype.initializePlayers = function() {
         player.angle = Math.random() * 360;	
         player.isPlaying = true;
         player.isAlive = true;
-	player.resetTimeout();
+		player.resetTimeout();
     }
 };
 

@@ -33,7 +33,7 @@ Game.prototype.getDrawingContext = function() {
 
 Game.prototype.start = function() {
 	
-	if (this.playerManager.numberOfPlayers() === 0) {
+	if (this.playerManager.numberOfPlayers() < 2) {
 		this.engineOnHalt = true;
 		this.drawFrame();
 		return;
@@ -66,10 +66,14 @@ Game.prototype.addPlayer = function(name) {
 };
 
 Game.prototype.removePlayer = function (playerID) {
-	this.playerManager.removePlayer(playerID);	
+	this.playerManager.removePlayer(playerID);
 	
-	if (game.playerManager.numberOfPlayersAlive() < 1) {
-		game.stop();
+	if (this.playerManager.numberOfPlayersAlive() < 2) {
+		this.stop();
+
+        if (this.engine.onRoundOver) {
+            this.engine.onRoundOver();
+        }
 	}
 };
 
@@ -110,4 +114,3 @@ Game.prototype.drawFrame = function () {
 	this.drawingContext.strokeStyle = "#E3D42E";
 	this.drawingContext.strokeRect(0, 0, Config.canvasWidth - 0, Config.canvasHeight - 0);
 };
-
