@@ -25,6 +25,7 @@ var Game = Game || {};
         processCurrentDirectionsIntervalID,
         scoreList = [],
         roundResult = [],
+        gameStarted = false,
         i,
         j,
         player,
@@ -84,6 +85,8 @@ var Game = Game || {};
             domCanvas.className = 'show';
             domStartGameContainer.className = 'hide';
             domHelpContainer.className = 'hide';
+
+            gameStarted = true;
 
             game.start();
             game.startSession();
@@ -185,7 +188,7 @@ var Game = Game || {};
             updatePlayerList();
             checkPlayerLimit();
 
-            if (players.length > 1 && domStartGameContainer.className == 'hide') {
+            if (players.length > 1 && domStartGameContainer.className == 'hide' && !gameStarted) {
                 domStartGameContainer.className = 'show';
             }
         },
