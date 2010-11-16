@@ -50,7 +50,6 @@ Engine.prototype.draw = function() {
 			if (this.hitTest({x: player.x + deltaX, y: player.y + deltaY})) {
 				
 				this.playerRank.unshift(player.ID);
-                console.log('Unshift: %s', player.ID)
 				
 				player.isAlive = false;
 				hit = true;
@@ -110,6 +109,10 @@ Engine.prototype.draw = function() {
 Engine.prototype.hitTest = function(point) {
 	
 	// FIXME: Sometimes unexpected hits.
+
+    if (point.x > Config.canvasWidth || point.y > Config.canvasHeight || point.x < 0 || point.y < 0) {
+        return true;
+    }
 
 	if (this.drawingContext.getImageData(point.x, point.y, 1, 1).data[3] > Config.threshold) {
 		return true;
