@@ -15,6 +15,7 @@ var Game = Game || {};
         domPlayerList = document.getElementById('playerList'),
         domStartGameButton = document.getElementById('startGame'),
         domStartGameContainer = document.getElementById('startGameContainer'),
+        domUpgradeContainer = document.getElementById('upgradeContainer'),
         minimalPlayerNameLength = 2,
         keysInUse = {},
         currentDirections = {},
@@ -257,15 +258,22 @@ var Game = Game || {};
             }
         };
 
-    window.onkeydown = handleKeyDown;
-    window.onkeyup = handleKeyUp;  
-    
-    domAddPlayerButton.onclick = handleAddPlayerClick;
-    domStartGameButton.onclick = handleStartGameClick;
 
-    domPlayerList.onclick = handleRemovePlayerClick;
+    if (!domCanvas.getContext) {
+        domUpgradeContainer.className = 'show';
+        domHelpContainer.className = 'hide';
+        domAddPlayerContainer.className = 'hide';
+    } else {
+        window.onkeydown = handleKeyDown;
+        window.onkeyup = handleKeyUp;  
+        
+        domAddPlayerButton.onclick = handleAddPlayerClick;
+        domStartGameButton.onclick = handleStartGameClick;
 
-    game.setRoundCallback(handleRoundEnd);
-    
-    writePlayerControls();
+        domPlayerList.onclick = handleRemovePlayerClick;
+
+        game.setRoundCallback(handleRoundEnd);
+        
+        writePlayerControls();
+    }
 })(Game);
