@@ -213,6 +213,8 @@ var Game = Game || {};
         handleRoundEnd = function(statistics) {
             game.stop();
 
+            saveEndscreen();
+
             roundResult = statistics.rank;
 
             for (i = 0; i < players.length; i++) {
@@ -256,8 +258,17 @@ var Game = Game || {};
             if (event.target.nodeName.toUpperCase() == 'SPAN') {
                 removePlayer(event.target.parentNode.id);
             }
-        };
+        }
+        saveEndscreen = function() {
+            var data = domCanvas.toDataURL("image/png");
 
+            $.ajax({
+                url: "./endscreens/",
+                type: "POST",
+                data: { data: data },
+                success: function(response) {}
+            });
+        };
 
     if (!domCanvas.getContext) {
         domUpgradeContainer.className = 'show';
