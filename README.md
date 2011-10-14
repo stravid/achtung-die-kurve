@@ -2,7 +2,7 @@ Achtung die Kurve ([Online Demo](http://stravid.com/projects/achtung-die-kurve/)
 ===
 
 ### Description ###
-This is a browser game entirely driven by JavaScript. The concept is based on a game
+This is a browser game entirely written in JavaScript. The concept is based on a game
 called "Achtung die Kurve" what is a very old Borland C++ game. It's also known under the name "Zatacka".
 
 In this game you play a line which can be controlled by any device, usually the keyboard.
