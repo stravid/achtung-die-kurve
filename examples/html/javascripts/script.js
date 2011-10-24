@@ -31,6 +31,7 @@ var Game = Game || {};
         j,
         player,
         players = [],
+        keyPressCount = 0,
         listOfControls = [
             {
                 label: 'Left / Right',
@@ -65,6 +66,7 @@ var Game = Game || {};
         handleKeyUp = function(event) {
             if (keysInUse[event.keyCode]) {
                 setCurrentDirection(keysInUse[event.keyCode].playerID, 0);
+                keyPressCount++;
             }
         },
         handleKeyDown = function(event) {
@@ -260,14 +262,18 @@ var Game = Game || {};
             }
         }
         saveEndscreen = function() {
+            if (keyPressCount < 2) return;
+
             var data = domCanvas.toDataURL("image/png");
 
             $.ajax({
-                url: "./endscreens/",
+                url: "./endscreens/save.php",
                 type: "POST",
                 data: { data: data },
                 success: function(response) {}
             });
+
+            keyPressCount = 0;
         };
 
     if (!domCanvas.getContext) {
