@@ -42,6 +42,8 @@
   while($get_statement->fetch()) {
     echo '<a href="./' . $file_name . '"><img src="' . $file_name . '" width="20%" height="20%" style="float: left; margin: 20px;"></a>';
   }
+
+  $get_statement->close();
 ?>
 
 </body>
