@@ -9,7 +9,7 @@
   $count_statement->fetch();
   $count_statement->close();
 
-  $get_statement = $db->prepare("SELECT file_name FROM achtung_die_kurve_endscreens LIMIT 100");
+  $get_statement = $db->prepare("SELECT file_name FROM achtung_die_kurve_endscreens ORDER BY created_at DESC LIMIT 10");
   $get_statement->execute();
   $get_statement->bind_result($file_name);
 ?>
@@ -36,7 +36,7 @@
 
   <h2>Number of stored endscreens: <span class="yellow"><?php echo $count; ?></span></h2>
   <br><br>
-  <h2>Last one hundred endscreens:</h2>
+  <h2>Last ten endscreens:</h2>
 
 <?php
   while($get_statement->fetch()) {
@@ -44,6 +44,21 @@
   }
 
   $get_statement->close();
+?>
+
+  <br><br>
+  <h2 style="clear: both;">Best ten endscreens:</h2>
+
+<?php
+  $key_statement = $db->prepare("SELECT file_name FROM achtung_die_kurve_endscreens ORDER BY key_press_count DESC LIMIT 10");
+  $key_statement->execute();
+  $key_statement->bind_result($file_name);
+
+  while($key_statement->fetch()) {
+    echo '<a href="./' . $file_name . '"><img src="' . $file_name . '" width="20%" height="20%" style="float: left; margin: 20px;"></a>';
+  }
+
+  $key_statement->close();
 ?>
 
 </body>

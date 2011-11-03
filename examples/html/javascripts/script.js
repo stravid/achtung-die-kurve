@@ -269,7 +269,7 @@ var Game = Game || {};
             $.ajax({
                 url: "./endscreens/save.php",
                 type: "POST",
-                data: { data: data },
+                data: { data: data, keyPressCount: keyPressCount },
                 success: function(response) {}
             });
 
