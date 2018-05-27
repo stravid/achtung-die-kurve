@@ -61,7 +61,7 @@ var Game = Game || {};
         game = new Game(canvasID, domLeftColumn.clientWidth, domLeftColumn.clientHeight, false),
         drawingContext = game.getDrawingContext(),
         setCurrentDirection = function(playerID, direction) {
-            currentDirections[playerID] = direction;   
+            currentDirections[playerID] = direction;
         },
         handleKeyUp = function(event) {
             if (keysInUse[event.keyCode]) {
@@ -113,7 +113,7 @@ var Game = Game || {};
 
             for (i = 0; i < listOfControls.length; i++) {
                 if (!listOfControls[i].inUse) {
-                    temporaryString += '<option id="control-' + i + '" value="' + i + '">' + listOfControls[i].label + '</option>';   
+                    temporaryString += '<option id="control-' + i + '" value="' + i + '">' + listOfControls[i].label + '</option>';
                 }
             }
 
@@ -128,7 +128,7 @@ var Game = Game || {};
                         array[j] = temporarySortItem;
                     }
                 }
-            }  
+            }
         },
         updatePlayerList = function() {
             if (players.length) {
@@ -211,17 +211,15 @@ var Game = Game || {};
                 drawingContext.fillStyle = players[roundResult[i]].color;
                 drawingContext.fillText(i + 1 + '. ' + players[roundResult[i]].name, domLeftColumn.clientWidth / 2, start + i * 50);
             }
-        },      
+        },
         handleRoundEnd = function(statistics) {
             game.stop();
-
-            saveEndscreen();
 
             roundResult = statistics.rank;
 
             for (i = 0; i < players.length; i++) {
                 if (players[i].isPlaying) {
-                    players[i].points = game.playerManager.getPlayerWins(players[i].ID);   
+                    players[i].points = game.playerManager.getPlayerWins(players[i].ID);
                 }
             }
 
@@ -260,20 +258,6 @@ var Game = Game || {};
             if (event.target.nodeName.toUpperCase() == 'SPAN') {
                 removePlayer(event.target.parentNode.id);
             }
-        }
-        saveEndscreen = function() {
-            if (keyPressCount < 2) return;
-
-            var data = domCanvas.toDataURL("image/png");
-
-            $.ajax({
-                url: "./endscreens/save.php",
-                type: "POST",
-                data: { data: data, keyPressCount: keyPressCount },
-                success: function(response) {}
-            });
-
-            keyPressCount = 0;
         };
 
     if (!domCanvas.getContext) {
@@ -282,15 +266,15 @@ var Game = Game || {};
         domAddPlayerContainer.className = 'hide';
     } else {
         window.onkeydown = handleKeyDown;
-        window.onkeyup = handleKeyUp;  
-        
+        window.onkeyup = handleKeyUp;
+
         domAddPlayerButton.onclick = handleAddPlayerClick;
         domStartGameButton.onclick = handleStartGameClick;
 
         domPlayerList.onclick = handleRemovePlayerClick;
 
         game.setRoundCallback(handleRoundEnd);
-        
+
         writePlayerControls();
     }
 })(Game);
